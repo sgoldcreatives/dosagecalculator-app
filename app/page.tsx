@@ -1,26 +1,46 @@
 "use client";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { Accordion, AccordionItem } from "@nextui-org/react";
 import Signature from "@/components/Signature";
-import { Med, medications } from "./Medications"; // Adjust the path as needed
+import { medications, Med } from "./columns";
+import { DataTable } from "./datatable";
 
 const logoUrl = "/logo-clinic.png";
+import { ColumnDef } from "@tanstack/react-table";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
 }
+type User = (typeof medications)[0];
 
 export default function Home() {
   const [weight, setWeight] = useState("");
   const imgSize = 201 / 2;
-  const defaultContent = "test text";
-  const filteredOralData = medications.filter(
-    (med) => med.drugClass === "Oral"
-  );
-  const filteredInjData = medications.filter(
-    (med) => med.drugClass === "Injectable"
-  );
+  const data = medications;
+  const columns: ColumnDef<Med>[] = [
+    {
+      accessorKey: "name",
+      header: "Name",
+    },
+    {
+      accessorKey: "dosage",
+      header: "Dosage",
+      cell: ({ row }) => {
+        const dosage = parseFloat(row.getValue("dosage"));
+        const calculated = dosage * Number(weight);
+
+        return <div className="text-right font-medium">{(calculated).toFixed(2) + ' cc'}</div>;
+      },
+    },
+    {
+      accessorKey: "tags",
+      header: "Tags",
+    },
+    {
+      accessorKey: "dosageForm",
+      header: "Dosage Form",
+    },
+  ];
 
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
@@ -57,39 +77,18 @@ export default function Home() {
           <div className="pl-4 mt-8 flex">
             <p>Weight in kg:</p>
             <p className="ml-2 input input-bordered w-full max-w-xs text-lg text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
-              {Number(weight) > 0 ? (Number(weight) / 2.205).toFixed(1) : <></>}
+              {Number(weight) > 0 ? (
+                lbsToKg(Number(weight) / 2.205).toFixed(1)
+              ) : (
+                <></>
+              )}
             </p>
             <span className="text-slate-950 ml-2 mt-2.5">kgs</span>
           </div>
         </div>
         <div>
-          <Accordion selectionMode="multiple">
-            <AccordionItem
-              key="1"
-              aria-label="Accordion 1"
-              title="Oral Medications"
-            >
-              <ul className="list-group text-slate-950 ">
-                {filteredOralData.map((item) => (
-                  <li key={item.name}>
-                    {/* Render desired properties here */}
-                    {item.name}: {(item.dosage * Number(weight)).toFixed(2) + " mL"}
-                  </li>
-                ))}
-              </ul>
-            </AccordionItem>
-            <AccordionItem key="2" aria-label="Accordion 2" title="Injections">
-              <ul className="list-group text-slate-950">
-                {filteredInjData.map((item) => (
-                  <li key={item.name}>
-                    {/* Render desired properties here */}
-                    {item.name}:{" "}
-                    {(item.dosage * Number(weight)).toFixed(2) + " cc"}
-                  </li>
-                ))}
-              </ul>
-            </AccordionItem>
-          </Accordion>
+          {" "}
+          <DataTable columns={columns} data={data} />
         </div>
         <Signature />
       </div>
