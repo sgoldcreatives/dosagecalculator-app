@@ -73,8 +73,7 @@ export default function Home() {
                 {filteredOralData.map((item) => (
                   <li key={item.name}>
                     {/* Render desired properties here */}
-                    {item.name} |{" "}
-                    {(item.dosage * Number(weight)).toFixed(2) + " mL"}
+                    {item.name}: {(item.dosage * Number(weight)).toFixed(2) + " mL"}
                   </li>
                 ))}
               </ul>
