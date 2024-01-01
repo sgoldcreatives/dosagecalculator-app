@@ -144,14 +144,14 @@ export const medications: Med[] = [
   },
   {
     dosage: 0.06,
-    name: "Gabapentin",
+    name: "Gabapentin (K9)",
     drugClass: "Oral",
     forDog: true,
     forCat: false,
   },
   {
     dosage: 0.09,
-    name: "Gabapentin",
+    name: "Gabapentin (Fel)",
     drugClass: "Oral",
     forDog: false,
     forCat: true,
