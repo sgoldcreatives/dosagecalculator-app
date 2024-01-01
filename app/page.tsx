@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, ChangeEvent } from "react";
 import Image from "next/image";
-
+import { Accordion, AccordionItem } from "@nextui-org/react";
+import Signature from "@/components/Signature";
+import { Med, medications } from "./Medications"; // Adjust the path as needed
 
 const logoUrl = "/logo-clinic.png";
 
@@ -12,8 +14,16 @@ function lbsToKg(Pweight: number) {
 export default function Home() {
   const [weight, setWeight] = useState("");
   const imgSize = 201 / 2;
+  const defaultContent = "test text";
+  const filteredOralData = medications.filter(
+    (med) => med.drugClass === "Oral"
+  );
+  const filteredInjData = medications.filter(
+    (med) => med.drugClass === "Injectable"
+  );
+
   return (
-    <main className="h-screen bg-sky-50">
+    <main className="h-screen bg-sky-100">
       <div className="flex flex-col justify-between p-5">
         <div className="flex  bg-violet-100 rounded-md border-violet-300 border-2 pl-3 py-3 max-w-screen-md ml-4">
           <Image
@@ -52,11 +62,37 @@ export default function Home() {
             <span className="text-slate-950 ml-2 mt-2.5">kgs</span>
           </div>
         </div>
-        <div className="fixed bottom-0 right-0 p-5">
-          <p className=" text-gray-500 italic text-xs">
-            Created by Saar Gold - Decemeber 2023
-          </p>
+        <div>
+          <Accordion selectionMode="multiple">
+            <AccordionItem
+              key="1"
+              aria-label="Accordion 1"
+              title="Oral Medications"
+            >
+              <ul className="list-group text-slate-950 ">
+                {filteredOralData.map((item) => (
+                  <li key={item.name}>
+                    {/* Render desired properties here */}
+                    {item.name} |{" "}
+                    {(item.dosage * Number(weight)).toFixed(2) + "cc"}
+                  </li>
+                ))}
+              </ul>
+            </AccordionItem>
+            <AccordionItem key="2" aria-label="Accordion 2" title="Injections">
+              <ul className="list-group text-slate-950">
+                {filteredInjData.map((item) => (
+                  <li key={item.name}>
+                    {/* Render desired properties here */}
+                    {item.name}:{" "}
+                    {(item.dosage * Number(weight)).toFixed(2) + "cc"}
+                  </li>
+                ))}
+              </ul>
+            </AccordionItem>
+          </Accordion>
         </div>
+        <Signature />
       </div>
     </main>
   );

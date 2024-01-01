@@ -1,0 +1,201 @@
+export interface Med {
+  dosage: number;
+  name: string;
+  drugClass: medForm;
+  forDog: boolean;
+  forCat: boolean;
+}
+
+export type medForm = "Oral" | "Injectable";
+
+export const medications: Med[] = [
+  {
+    dosage: 0.03,
+    name: "Meloxicam",
+    drugClass: "Oral",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.045,
+    name: "Metronidazole",
+    drugClass: "Oral",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.03,
+    name: "Panacur",
+    drugClass: "Oral",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.009,
+    name: "Ketofen",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.04,
+    name: "Rimadyl/Carprofen",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.018,
+    name: "Meloxicam",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.03,
+    name: "Buprenorphine (0.3mg/mL)",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.015,
+    name: "Buprenorphine (0.6mg/mL)",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.045,
+    name: "Cerenia",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.009,
+    name: "Triamcinolone",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.045,
+    name: "Convenia",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.099,
+    name: "Cefazolin",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.226,
+    name: "Propofol",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.0226,
+    name: "Famotidine",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.018,
+    name: "Diphenhydramine",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.027,
+    name: "Metoclopramide",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.04,
+    name: "Zycortal",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: false,
+  },
+  {
+    dosage: 0.113,
+    name: "Ondansetron",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.022,
+    name: "Doxycycline",
+    drugClass: "Oral",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.06,
+    name: "Gabapentin",
+    drugClass: "Oral",
+    forDog: true,
+    forCat: false,
+  },
+  {
+    dosage: 0.09,
+    name: "Gabapentin",
+    drugClass: "Oral",
+    forDog: false,
+    forCat: true,
+  },
+  {
+    dosage: 0.0997,
+    name: "Hydrocodone",
+    drugClass: "Oral",
+    forDog: true,
+    forCat: false,
+  },
+  {
+    dosage: 0.09,
+    name: "Depomedrol",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.018,
+    name: "Atropine",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.045,
+    name: "Onsior",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.181,
+    name: "Nocita",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+  {
+    dosage: 0.02267,
+    name: "Hydromorphine",
+    drugClass: "Injectable",
+    forDog: true,
+    forCat: true,
+  },
+];
