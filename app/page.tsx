@@ -41,7 +41,7 @@ export default function Home() {
         <div className="border-4 rounded-md border-slate-300 m-4 pb-3 px-3 border-dashed max-w-screen-md text-slate-950">
           <div className="flex items-center">
             <div className="flex items-center">
-              Enter patient's weight:
+              Enter patient&apos;s weight:
               <div className="pl-4 pt-1">
                 <div className="pt-5 flex items-center">
                   <input
