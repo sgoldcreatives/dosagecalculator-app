@@ -23,7 +23,7 @@ export default function Home() {
   );
 
   return (
-    <main className="h-screen bg-sky-100">
+    <main className="h-screen bg-sky-100 overflow-auto">
       <div className="flex flex-col justify-between p-5">
         <div className="flex  bg-violet-100 rounded-md border-violet-300 border-2 pl-3 py-3 max-w-screen-md ml-4">
           <Image
@@ -74,7 +74,7 @@ export default function Home() {
                   <li key={item.name}>
                     {/* Render desired properties here */}
                     {item.name} |{" "}
-                    {(item.dosage * Number(weight)).toFixed(2) + "cc"}
+                    {(item.dosage * Number(weight)).toFixed(2) + " mL"}
                   </li>
                 ))}
               </ul>
@@ -85,7 +85,7 @@ export default function Home() {
                   <li key={item.name}>
                     {/* Render desired properties here */}
                     {item.name}:{" "}
-                    {(item.dosage * Number(weight)).toFixed(2) + "cc"}
+                    {(item.dosage * Number(weight)).toFixed(2) + " cc"}
                   </li>
                 ))}
               </ul>
