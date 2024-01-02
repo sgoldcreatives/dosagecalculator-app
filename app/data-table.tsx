@@ -75,7 +75,7 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
               table.getColumn("name")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-sm bg-violet-100 border-2 border-violet-300"
           />
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -83,7 +83,7 @@ export function DataTable<TData, TValue>({
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className="w-[200px] justify-between"
+                className="w-[200px] justify-between bg-violet-100 border-2 border-violet-300 ml-96"
               >
                 {value
                   ? dosageForm.find((dosageForm) => dosageForm.value === value)
