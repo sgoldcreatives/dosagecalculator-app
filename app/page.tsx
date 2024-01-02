@@ -31,7 +31,7 @@ export default function Home() {
         const calculated = dosage * Number(weight);
 
         return (
-          <div className="text-right font-medium">
+          <div className="text-left font-medium">
             {calculated.toFixed(2) + " cc"}
           </div>
         );
