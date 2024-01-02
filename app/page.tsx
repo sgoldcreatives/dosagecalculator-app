@@ -49,7 +49,9 @@ export default function Home() {
             <DialogContent>
               <DialogHeader>
                 <DialogTitle className="italic text-slate-400 text-base">
-                  Slight error, you have not entered a number!
+                  {!isNaN(calculated) && calculated > 0
+                    ? ""
+                    : "Slight error, you have not entered a number!"}
                 </DialogTitle>
                 <DialogDescription className="text-lg font-medium text-slate-950">
                   {!isNaN(calculated) && calculated > 0
