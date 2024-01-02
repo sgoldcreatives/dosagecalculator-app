@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import { Input } from "@/components/ui/input";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -35,6 +36,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { dosageForm } from "./combobox-data";
+import { DialogBox } from "./dialogbox";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -49,7 +51,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const table = useReactTable({
+   const table = useReactTable({
     data,
     columns,
     onSortingChange: setSorting,
@@ -77,6 +79,7 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-sm bg-violet-100 border-2 border-violet-300"
           />
+          <DialogBox/>
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -88,14 +91,14 @@ export function DataTable<TData, TValue>({
                 {value
                   ? dosageForm.find((dosageForm) => dosageForm.value === value)
                       ?.label
-                  : "Select framework..."}
+                  : "Select dosage form..."}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
               <Command>
-                <CommandInput placeholder="Search framework..." />
-                <CommandEmpty>No framework found.</CommandEmpty>
+                <CommandInput placeholder="Search dosage form..." />
+                <CommandEmpty>No dosage form found.</CommandEmpty>
                 <CommandGroup>
                   {dosageForm.map((framework) => (
                     <CommandItem
@@ -130,7 +133,7 @@ export function DataTable<TData, TValue>({
           </Popover>
         </div>
       </div>
-      <Table className="border-4 border-dashed rounded-md border-slate-300">
+      <Table className="border-4 border-dashed bg-violet-100 rounded-md border-slate-300">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -155,7 +158,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className=""
+                className="border-4 border-dashed border-slate-300"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="">

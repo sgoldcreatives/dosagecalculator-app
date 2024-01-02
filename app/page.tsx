@@ -79,7 +79,7 @@ export default function Home() {
             <p>Weight in kg:</p>
             <p className="ml-2 input input-bordered w-full max-w-xs text-lg text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
               {Number(weight) > 0 ? (
-                lbsToKg(Number(weight) / 2.205).toFixed(1)
+                lbsToKg(Number(weight)).toFixed(1)
               ) : (
                 <></>
               )}
