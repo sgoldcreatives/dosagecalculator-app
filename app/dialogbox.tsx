@@ -15,7 +15,7 @@ export function DialogBox() {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="ml-5 bg-violet-100 border-2 border-violet-300"
+          className="ml-auto bg-violet-100 border-2 border-violet-300"
         >
           Edit Tag Filters
         </Button>

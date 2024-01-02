@@ -8,6 +8,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { MoreHorizontal } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Check, ChevronsUpDown } from "lucide-react";
@@ -86,7 +95,7 @@ export function DataTable<TData, TValue>({
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className="w-[200px] justify-between bg-violet-100 border-2 border-violet-300 ml-96"
+                className="w-[200px] justify-between bg-violet-100 border-2 border-violet-300 ml-auto mr-52 right-0"
               >
                 {value
                   ? dosageForm.find((dosageForm) => dosageForm.value === value)
