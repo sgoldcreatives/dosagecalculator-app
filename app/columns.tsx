@@ -38,11 +38,13 @@ export const medications: Med[] = [
   //     name: "Panacur",
   //     dosageForm: "Oral",
   //   },
-  //   {
-  //     dosage: 0.009,
-  //     name: "Ketofen",
-  //     dosageForm: "Injectable",
-  //   },
+  {
+      id: 4,
+      dosage:0.009,
+      name: "Ketofen",
+      tags: ["For Dogs", "Pain", "Sx"],
+      dosageForm: "Injectable",
+    },
   //   {
   //     dosage: 0.04,
   //     name: "Rimadyl/Carprofen",
