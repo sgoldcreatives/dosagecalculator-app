@@ -7,6 +7,7 @@ import { DataTable } from "./data-table";
 
 const logoUrl = "/logo-clinic.png";
 import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
@@ -29,7 +30,11 @@ export default function Home() {
         const dosage = parseFloat(row.getValue("dosage"));
         const calculated = dosage * Number(weight);
 
-        return <div className="text-right font-medium">{(calculated).toFixed(2) + ' cc'}</div>;
+        return (
+          <div className="text-right font-medium">
+            {calculated.toFixed(2) + " cc"}
+          </div>
+        );
       },
     },
     {
@@ -41,7 +46,6 @@ export default function Home() {
       header: "Dosage Form",
     },
   ];
-
 
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
@@ -78,20 +82,28 @@ export default function Home() {
           <div className="pl-4 mt-8 flex">
             <p>Weight in kg:</p>
             <p className="ml-2 input input-bordered w-full max-w-xs text-lg text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
-              {Number(weight) > 0 ? (
-                lbsToKg(Number(weight)).toFixed(1)
-              ) : (
-                <></>
-              )}
+              {Number(weight) > 0 ? lbsToKg(Number(weight)).toFixed(1) : <></>}
             </p>
             <span className="text-slate-950 ml-2 mt-2.5">kgs</span>
           </div>
         </div>
         <div>
-          
           <DataTable columns={columns} data={data} />
         </div>
-        <Signature />
+        <div className="flex bottom-0 right-0 p-5 ">
+          <p className=" text-gray-500 italic text-xs">
+            Created by Saar Gold - December 2023
+          </p>
+          <Link
+            href="https://github.com/sgoldcreatives/dosagecalculator-app"
+            rel="noopener noreferrer"
+            target="_blank"
+            className="ml-3 underline text-xs text-blue-600"
+          >
+            {" "}
+            GitHub{" "}
+          </Link>
+        </div>
       </div>
     </main>
   );
