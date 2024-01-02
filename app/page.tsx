@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Signature from "@/components/Signature";
 import { medications, Med } from "./columns";
-import { DataTable } from "./datatable";
+import { DataTable } from "./data-table";
 
 const logoUrl = "/logo-clinic.png";
 import { ColumnDef } from "@tanstack/react-table";
@@ -41,6 +41,7 @@ export default function Home() {
       header: "Dosage Form",
     },
   ];
+
 
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
@@ -87,7 +88,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          {" "}
+          
           <DataTable columns={columns} data={data} />
         </div>
         <Signature />
