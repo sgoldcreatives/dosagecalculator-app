@@ -34,20 +34,6 @@ export const medications: Med[] = [
     dosageForm: "Oral",
   },
   {
-    id: 1,
-    dosage: 0.03,
-    name: "Meloxicam",
-    tags: ["For Dogs", "For Cats", "Pain", "Sx"],
-    dosageForm: "Oral",
-  },
-  {
-    id: 2,
-    dosage: 0.045,
-    name: "Metronidazole",
-    tags: ["Antibiotic", "For Cats", "For Dogs", "Tx"],
-    dosageForm: "Oral",
-  },
-  {
     id: 3,
     dosage: 0.03,
     name: "Panacur",

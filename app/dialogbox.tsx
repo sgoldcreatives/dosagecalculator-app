@@ -13,7 +13,7 @@ export function DialogBox() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="ml-5">
+        <Button variant="outline" className="ml-5 bg-violet-100 border-2 border-violet-300">
           Edit Tag Filters
         </Button>
       </DialogTrigger>
