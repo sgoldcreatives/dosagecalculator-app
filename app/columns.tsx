@@ -22,7 +22,7 @@ export const medications: Med[] = [
   {
     id: 1,
     dosage: 0.03,
-    name: "Meloxicam",
+    name: "Meloxicam 1.5 mg/mL",
     tags: ["For Dogs", "For Cats", "Pain", "Sx"],
     dosageForm: "Oral",
   },
@@ -57,7 +57,7 @@ export const medications: Med[] = [
   {
     id: 6,
     dosage: 0.018,
-    name: "Meloxicam",
+    name: "Meloxicam 5 mg/mL",
     tags: ["For Dogs", "For Cats", "Pain", "Sx"],
     dosageForm: "Injectable",
   },
@@ -207,5 +207,12 @@ export const medications: Med[] = [
     name: "Hydromorphine",
     tags: ["Pain", "Sx"],
     dosageForm: "Injectable",
+  },
+  {
+    id: 28,
+    dosage: 0.0999,
+    name: "Meloxicam 0.5 mg/mL",
+    tags: ["For Dogs", "For Cats", "Pain", "Sx"],
+    dosageForm: "Oral",
   },
 ];
