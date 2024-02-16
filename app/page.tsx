@@ -80,6 +80,10 @@ export default function Home() {
       header: "Name",
     },
     {
+      accessorKey: 'concentration',
+      header: 'Concentration',
+    },
+    {
       accessorKey: "dosage",
       header: "Dosage",
       cell: ({ row }) => {
