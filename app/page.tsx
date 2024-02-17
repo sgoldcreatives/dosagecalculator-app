@@ -67,7 +67,7 @@ export default function Home() {
                     : "Generally for " +
                       medications.name +
                       " you should multiply the patient's weight (in lbs) by " +
-                      medications.dosage +
+                      medications.dosage.toFixed(3) +
                       "."}
                 </DialogDescription>
               </DialogHeader>
