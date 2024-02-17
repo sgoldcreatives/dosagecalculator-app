@@ -17,6 +17,7 @@ import {
 const logoUrl = "/logo-clinic.png";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import { AlertNewFeature } from "./newfeature-alert";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
@@ -141,6 +142,7 @@ export default function Home() {
 
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
+      <AlertNewFeature/>
       <div className="flex flex-col justify-between p-5">
         <div className="flex  bg-violet-100 rounded-md border-violet-300 border-2 pl-3 py-3 max-w-screen-md ml-4">
           <Image
