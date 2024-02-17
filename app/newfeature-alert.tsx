@@ -5,13 +5,17 @@ import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
 export function AlertNewFeature() {
   return (
-    <div className="bg-white border-2 rounded-md border-slate-500 text-lg inline-block align-middle p-2 m-4 ml-9">
-      <h3 className="font-bold">Heads up!</h3>
+    <div className="bg-slate-200 border-2 rounded-md border-slate-500 text-lg inline-block align-middle p-2 m-4 ml-9">
+      <h3 className="font-bold italic">Heads up!</h3>
       <p>
-        You can now read up about all of these drugs! Look for the{" "}
-        <QuestionMarkCircledIcon className="h-4 w-4 inline-block align-middle" />{" "}
-        icon!
-      </p>
+        You can now explore information about all of these medications.
+        </p>
+        <p>
+            Keep an
+            eye out for the{" "}
+            <QuestionMarkCircledIcon className="h-4 w-4 inline-block align-middle" />{" "}
+            icon!
+        </p>
     </div>
   );
 }

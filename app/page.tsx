@@ -99,6 +99,10 @@ export default function Home() {
                 </DialogTitle>
                 <DialogDescription className="text-lg font-medium text-slate-900 font-normal">
                   {medications.bio}
+                  <p className='italic text-sm text-slate-500'>
+                    For any suggestions, bug reports, or errors found, feel free
+                    to contact Saar!
+                  </p>
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>
