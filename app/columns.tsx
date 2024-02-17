@@ -5,6 +5,7 @@ export interface Med {
   concentration: string;
   tags: medTags[];
   dosageForm: medForm;
+  bio: string;
 }
 "use client";
 
@@ -27,6 +28,7 @@ export const medications: Med[] = [
     concentration: "1.5 mg/mL",
     tags: ["For Dogs", "For Cats", "Pain", "Sx"],
     dosageForm: "Oral",
+    bio: "Meloxicam is commonly prescribed for dogs and cats to manage pain, particularly after surgical procedures or in cases of osteoarthritis.",
   },
   {
     id: 2,
@@ -35,6 +37,7 @@ export const medications: Med[] = [
     concentration: "100 mg/mL",
     tags: ["Antibiotic", "For Cats", "For Dogs", "Tx"],
     dosageForm: "Oral",
+    bio: "Metronidazole is an antibiotic used to treat bacterial and parasitic infections in both dogs and cats, particularly those affecting the gastrointestinal tract.",
   },
   {
     id: 3,
@@ -43,6 +46,7 @@ export const medications: Med[] = [
     concentration: "100 mg/mL",
     tags: ["For Dogs", "For Cats", "Tx"],
     dosageForm: "Oral",
+    bio: "Panacur is an anthelmintic medication commonly used to deworm dogs and cats, targeting various intestinal parasites.",
   },
   {
     id: 4,
@@ -51,6 +55,7 @@ export const medications: Med[] = [
     concentration: "100 mg/mL",
     tags: ["For Dogs", "Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Ketofen is an injectable non-steroidal anti-inflammatory drug (NSAID) used to relieve pain and inflammation in dogs, particularly associated with musculoskeletal disorders and surgical procedures.",
   },
   {
     id: 5,
@@ -59,6 +64,7 @@ export const medications: Med[] = [
     concentration: "50 mg/mL",
     tags: ["For Dogs", "Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Rimadyl (Carprofen) is an injectable NSAID commonly used in dogs for pain relief and reduction of inflammation, especially in cases of osteoarthritis and postoperative care.",
   },
   {
     id: 6,
@@ -67,6 +73,7 @@ export const medications: Med[] = [
     concentration: "5 mg/mL",
     tags: ["For Dogs", "For Cats", "Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Meloxicam, in injectable form, is utilized in dogs and cats for pain management, particularly after surgical procedures or in cases of osteoarthritis.",
   },
   {
     id: 7,
@@ -75,22 +82,25 @@ export const medications: Med[] = [
     concentration: "0.3 mg/mL",
     tags: ["Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Buprenorphine is an injectable opioid analgesic used for pain relief in veterinary medicine, particularly in surgical and postoperative settings.",
   },
   {
     id: 8,
     dosage: 0.015,
-    name: "Buprenorphine (0.6mg/mL)",
-    concentration: '0.6 mg/mL',
+    name: "Buprenorphine",
+    concentration: "0.6 mg/mL",
     tags: ["Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Buprenorphine, with a concentration of 0.6 mg/mL, is an injectable opioid analgesic used for pain relief in veterinary medicine, particularly in surgical and postoperative settings.",
   },
   {
     id: 9,
     dosage: 0.045,
     name: "Cerenia",
-    concentration: '10 mg/mL',
+    concentration: "10 mg/mL",
     tags: ["For Dogs", "For Cats", "Sx"],
     dosageForm: "Injectable",
+    bio: "Cerenia is an injectable medication commonly prescribed to dogs and cats for the prevention and treatment of motion sickness, as well as to control vomiting associated with various conditions.",
   },
   {
     id: 10,
@@ -99,14 +109,16 @@ export const medications: Med[] = [
     concentration: "50 mg/5 mL",
     tags: ["Steroid", "Tx"],
     dosageForm: "Injectable",
+    bio: "Triamcinolone is a corticosteroid used in veterinary medicine to suppress inflammation and allergic reactions. It's employed in the treatment of various inflammatory and immune-mediated conditions in dogs and cats.",
   },
   {
     id: 11,
     dosage: 0.045,
     name: "Convenia",
-    concentration:'80 mg/mL',
+    concentration: "80 mg/mL",
     tags: ["Antibiotic", "Tx"],
     dosageForm: "Injectable",
+    bio: "Convenia (cefovecin) is a long-acting injectable antibiotic used in veterinary medicine for the treatment of bacterial infections in dogs and cats. Its extended duration of action simplifies treatment regimens, making it convenient for pet owners.",
   },
   {
     id: 12,
@@ -115,22 +127,25 @@ export const medications: Med[] = [
     concentration: "1 g/vial",
     tags: ["Antibiotic", "For Dogs", "Tx"],
     dosageForm: "Injectable",
+    bio: "Cefazolin is an injectable antibiotic commonly used in veterinary medicine to treat bacterial infections in dogs, particularly those involving the skin, soft tissue, and urinary tract.",
   },
   {
     id: 13,
     dosage: 0.226,
     name: "Propofol",
-    concentration:"50 mg/5 mL",
+    concentration: "50 mg/5 mL",
     tags: ["Sx"],
     dosageForm: "Injectable",
+    bio: "Propofol is an intravenous anesthetic agent commonly used for induction and maintenance of anesthesia in dogs and cats during surgical procedures.",
   },
   {
     id: 14,
     dosage: 0.0226,
     name: "Famotidine",
-    concentration: '10 mg/mL',
+    concentration: "10 mg/mL",
     tags: ["Tx"],
     dosageForm: "Injectable",
+    bio: "Famotidine is an injectable medication used in veterinary medicine to reduce stomach acid production and prevent ulcers in dogs and cats, particularly during periods of stress or when administering other medications known to cause gastric irritation.",
   },
   {
     id: 15,
@@ -139,6 +154,7 @@ export const medications: Med[] = [
     concentration: "50 mg/mL",
     tags: ["Sx"],
     dosageForm: "Injectable",
+    bio: "Diphenhydramine is an injectable antihistamine used in veterinary medicine to treat allergic reactions, motion sickness, and as a sedative for premedication before anesthesia.",
   },
   {
     id: 16,
@@ -147,6 +163,7 @@ export const medications: Med[] = [
     concentration: "5 mg/mL",
     tags: ["Sx"],
     dosageForm: "Injectable",
+    bio: "Metoclopramide is an injectable medication used in veterinary medicine to treat gastrointestinal motility disorders, vomiting, and to facilitate the passage of food through the digestive tract.",
   },
   {
     id: 17,
@@ -155,6 +172,7 @@ export const medications: Med[] = [
     concentration: "25 mg/mL",
     tags: ["Steroid", "Tx"],
     dosageForm: "Injectable",
+    bio: "Zycortal is an injectable medication used in dogs for the treatment of Addison's disease (hypoadrenocorticism), a condition characterized by insufficient production of adrenal hormones.",
   },
   {
     id: 18,
@@ -163,6 +181,7 @@ export const medications: Med[] = [
     concentration: "40 mg/20 mL",
     tags: ["Sx"],
     dosageForm: "Injectable",
+    bio: "Ondansetron is an injectable antiemetic medication used in veterinary medicine to prevent and treat nausea and vomiting, particularly in dogs and cats undergoing chemotherapy or experiencing motion sickness.",
   },
   {
     id: 19,
@@ -171,14 +190,16 @@ export const medications: Med[] = [
     concentration: "100 mg/mL",
     tags: ["Antibiotic", "Tx"],
     dosageForm: "Oral",
+    bio: "Doxycycline is a broad-spectrum antibiotic used in veterinary medicine to treat bacterial infections in dogs and cats, including respiratory tract infections, urinary tract infections, and tick-borne diseases.",
   },
   {
     id: 20,
     dosage: 0.056,
     name: "Gabapentin (K9)",
-    concentration: '80 mg/mL',
+    concentration: "80 mg/mL",
     tags: ["For Dogs", "Tx"],
     dosageForm: "Oral",
+    bio: "Gabapentin is an oral medication used in veterinary medicine to manage neuropathic pain and seizures in dogs. It's particularly effective for chronic pain conditions such as osteoarthritis and intervertebral disc disease.",
   },
   {
     id: 21,
@@ -187,6 +208,7 @@ export const medications: Med[] = [
     concentration: "80 mg/mL",
     tags: ["For Cats", "Tx"],
     dosageForm: "Oral",
+    bio: "Gabapentin is an oral medication used in veterinary medicine to manage neuropathic pain and seizures in cats. It's particularly effective for chronic pain conditions such as osteoarthritis and intervertebral disc disease.",
   },
   {
     id: 22,
@@ -195,6 +217,7 @@ export const medications: Med[] = [
     concentration: "5 mg/1.5 mg/5 mL",
     tags: ["Pain", "Sx"],
     dosageForm: "Oral",
+    bio: "Hydrocodone is an oral opioid analgesic used in veterinary medicine for the management of moderate to severe pain in dogs, particularly after surgical procedures or in cases of trauma.",
   },
   {
     id: 23,
@@ -203,14 +226,16 @@ export const medications: Med[] = [
     concentration: "20 mg/mL",
     tags: ["Steroid", "Tx"],
     dosageForm: "Injectable",
+    bio: "Depomedrol is an injectable corticosteroid used in veterinary medicine to suppress inflammation and allergic reactions. It's employed in the treatment of various inflammatory and immune-mediated conditions in dogs and cats.",
   },
   {
     id: 24,
     dosage: 0.018,
     name: "Atropine",
-    concentration: "8 mg/20 mL", 
+    concentration: "8 mg/20 mL",
     tags: ["Sx"],
     dosageForm: "Injectable",
+    bio: "Atropine is an injectable medication used in veterinary medicine to increase heart rate and reverse bradycardia, particularly during anesthesia or in cases of poisoning.",
   },
   {
     id: 25,
@@ -219,14 +244,16 @@ export const medications: Med[] = [
     concentration: "20 mg/mL",
     tags: ["Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Onsior is an injectable non-steroidal anti-inflammatory drug (NSAID) used for pain relief and reduction of inflammation in dogs, particularly associated with orthopedic and soft tissue surgeries.",
   },
   {
     id: 26,
     dosage: 0.181,
     name: "Nocita",
-    concentration: "13.3 mg/mL", 
+    concentration: "13.3 mg/mL",
     tags: ["Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Nocita is a long-acting local anesthetic used in dogs to provide postoperative pain relief following certain surgical procedures, particularly orthopedic surgeries such as cruciate ligament repair.",
   },
   {
     id: 27,
@@ -235,6 +262,7 @@ export const medications: Med[] = [
     concentration: "2 mg/mL",
     tags: ["Pain", "Sx"],
     dosageForm: "Injectable",
+    bio: "Hydromorphone is a potent injectable opioid analgesic used for the management of severe pain in dogs and cats, particularly in cases where other analgesics are ineffective or contraindicated.",
   },
   {
     id: 28,
@@ -243,5 +271,6 @@ export const medications: Med[] = [
     concentration: "0.5 mg/mL",
     tags: ["For Dogs", "For Cats", "Pain", "Sx"],
     dosageForm: "Oral",
-  },
+    bio: "Meloxicam is commonly prescribed for dogs and cats to manage pain, particularly after surgical procedures or in cases of osteoarthritis. This formulation is administered orally.",
+  }
 ];

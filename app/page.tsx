@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { medications, Med } from "./columns";
 import { Button } from "@/components/ui/button";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { DataTable } from "./data-table";
 import {
   Dialog,
@@ -30,7 +30,7 @@ export default function Home() {
   const data = medications;
   const columns: ColumnDef<Med>[] = [
     {
-      id: "actions",
+      id: "Instructions",
       cell: ({ row }) => {
         const medications = row.original;
         const dosage = parseFloat(row.getValue("dosage"));
@@ -76,12 +76,42 @@ export default function Home() {
       },
     },
     {
+      id: "Bio",
+      cell: ({ row }) => {
+        const medications = row.original;
+        const bio = row.getValue('bio');
+        return (
+          <Dialog>
+            <DialogTrigger>
+              <Button
+                variant="outline"
+                size="icon"
+                className="bg-violet-100 border-2 border-slate-300 "
+              >
+                <QuestionMarkCircledIcon className="h-4 w-4 " />
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className=" text-slate-950 font-bold">
+                  <h2> Info </h2>
+                </DialogTitle>
+                <DialogDescription className="text-lg font-medium text-slate-900 font-normal">
+                  {medications.bio}
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        );
+      },
+    },
+    {
       accessorKey: "name",
       header: "Name",
     },
     {
-      accessorKey: 'concentration',
-      header: 'Concentration',
+      accessorKey: "concentration",
+      header: "Concentration",
     },
     {
       accessorKey: "dosage",

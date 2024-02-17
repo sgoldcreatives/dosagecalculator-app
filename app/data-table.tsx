@@ -88,7 +88,6 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-sm bg-violet-100 border-2 border-violet-300"
           />
-          <DialogBox/>
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button
