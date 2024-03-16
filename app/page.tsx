@@ -5,6 +5,7 @@ import { medications, Med } from "./columns";
 import { Button } from "@/components/ui/button";
 import { MagnifyingGlassIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { DataTable } from "./data-table";
+import disclaimerbox, { DisclaimerBox } from "./disclaimerbox";
 import {
   Dialog,
   DialogContent,
@@ -146,7 +147,8 @@ export default function Home() {
 
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
-      <AlertNewFeature/>
+      <AlertNewFeature />
+
       <div className="flex flex-col justify-between p-5">
         <div className="flex  bg-violet-100 rounded-md border-violet-300 border-2 pl-3 py-3 max-w-screen-md ml-4">
           <Image
@@ -186,6 +188,9 @@ export default function Home() {
                 : nanError}
             </p>
             <span className="text-slate-950 ml-2 mt-2.5">kgs</span>
+            <span className='ml-10'>
+              <DisclaimerBox />
+            </span>
           </div>
         </div>
         <div>
