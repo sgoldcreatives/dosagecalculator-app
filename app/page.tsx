@@ -5,7 +5,7 @@ import { medications, Med } from "./columns";
 import { Button } from "@/components/ui/button";
 import { MagnifyingGlassIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { DataTable } from "./data-table";
-import disclaimerbox, { DisclaimerBox } from "./disclaimerbox";
+import { DisclaimerBox } from "./disclaimerbox";
 import {
   Dialog,
   DialogContent,
