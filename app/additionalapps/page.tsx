@@ -7,7 +7,7 @@ import TextInput from "../textinput";
 import Link from "next/link";
 const logoUrl = "/logo-clinic.png";
 
-const customDC = () => {
+export default function Page() {
   const imgSize = 201 / 2;
   const [weight, setWeight] = useState("");
   const [dosage, setDosage] = useState("");
@@ -167,6 +167,4 @@ const customDC = () => {
       </div>
     </main>
   );
-};
-
-export default customDC;
+}
