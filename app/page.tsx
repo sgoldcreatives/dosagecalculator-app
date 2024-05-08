@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import {
   MagnifyingGlassIcon,
   QuestionMarkCircledIcon,
-  HomeIcon
+  HomeIcon,
 } from "@radix-ui/react-icons";
 import { DataTable } from "./data-table";
-import { NanError } from "./additionalapps/NanError";
+import { NanError } from "./additionalapps/nanError";
 import { Footer } from "./footer";
 import { DisclaimerBox } from "./disclaimerbox";
 import {
@@ -188,7 +188,10 @@ export default function Home() {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span className="ml-1"> Custom Dosage Calculator (Expiremental)</span>
+              <span className="ml-1">
+                {" "}
+                Custom Dosage Calculator (Expiremental)
+              </span>
             </Link>
           </div>
         </div>
