@@ -74,8 +74,8 @@ export default function Page() {
           <span className="text-slate-950 ml-2">mg per kg</span>
         </div>
         <div className="flex items-center mb-3">
-          <label className="mr-4 font-semibold">Prescription in mg: </label>
-          <h2 className="input input-bordered w-full max-w-xs text-end text-lg bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
+          <label className="mr-4 font-semibold">Prescription: </label>
+          <h2 className="input input-bordered w-full max-w-xs border-dashed text-end text-lg bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
             {Number(weight) > 0 &&
             Number(dosage) > 0 &&
             !isNaN(Number(weight)) &&
@@ -94,9 +94,9 @@ export default function Page() {
           />
           <span className="text-slate-950 ml-2">mg per mL</span>
         </div>
-        <div>
-          <h2 className="font-semibold text-lg flex">
-            The result is:
+        <div className="flex">
+          <h2 className="font-semibold text-lg">The result is:</h2>
+          <h2 className=" input input-bordered w-full max-w-xs border-dashed text-end text-lg bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
             {Number(weight) > 0 &&
             Number(dosage) > 0 &&
             Number(concentration) > 0 &&
@@ -119,8 +119,9 @@ export default function Page() {
           </h2>
         </div>
       </div>
-
-      <div className="flex items-center">
+      <h1 className="font-semibold text-xl ml-6 mt-4">Formula: </h1>
+      <div className="flex items-center ml-8">
+        {" "}
         <span className="mr-1 text-lg">
           {Number(weight) > 0 &&
           Number(dosage) > 0 &&
