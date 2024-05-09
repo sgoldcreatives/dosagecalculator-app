@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { ClearAllButton } from "../components/clearall-button";
 const logoUrl = "/logo-clinic.png";
 
-
 export default function Page() {
   const imgSize = 201 / 2;
   const [weight, setWeight] = useState("");
@@ -24,9 +23,7 @@ export default function Page() {
   const handleConcentrationChange = (value: string) => {
     setConcentration(value);
   };
-  const handleClearAll = () => {
-    
-  }
+  const handleClearAll = () => {};
 
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
@@ -67,7 +64,7 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="flex flex-col mt-5 bg-slate-100 rounded-md border-violet-300 border-2 pl-3 py-3 max-w-screen-md ml-4">
+      <div className="flex flex-col bg-slate-100 rounded-md border-violet-300 border-2  max-w-full p-2 m-4 ">
         <div className="flex items-center">
           <TextInput
             label="Enter patient's weight"
@@ -124,7 +121,7 @@ export default function Page() {
             )}
           </h2>
         </div>
-        <div className=''>
+        <div className="">
           <ClearAllButton />
         </div>
       </div>

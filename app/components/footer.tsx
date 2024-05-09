@@ -4,7 +4,7 @@ export function Footer() {
     return (
       <div className="flex bottom-0 right-0 p-5 ">
         <p className=" text-gray-500 italic text-xs">
-          Created by Saar Gold - December 2023
+          Created by Saar Gold - December 2023; May 2024
         </p>
         <Link
           href="https://github.com/sgoldcreatives/dosagecalculator-app"
