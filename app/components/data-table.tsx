@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-   const table = useReactTable({
+  const table = useReactTable({
     data,
     columns,
     onSortingChange: setSorting,
@@ -141,7 +141,7 @@ export function DataTable<TData, TValue>({
           </Popover>
         </div>
       </div>
-      <Table className="border-4 border-dashed bg-violet-100 rounded-md border-slate-300">
+      <Table className="border-4 border-dashed rounded-md bg-violet-100  border-slate-300">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

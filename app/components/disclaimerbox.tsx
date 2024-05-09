@@ -14,7 +14,7 @@ export function DisclaimerBox() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">Dosage Disclaimer</Button>
+        <Button variant={"default"}>Dosage Disclaimer</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

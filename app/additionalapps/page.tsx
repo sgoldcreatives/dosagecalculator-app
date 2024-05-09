@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { NanError } from "./nanError";
-import { Footer } from "../footer";
+import { NanError } from "../components/nanError";
+import { Footer } from "../components/footer";
 import TextInput from "../textinput";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ClearAllButton } from "../components/clearall-button";
 const logoUrl = "/logo-clinic.png";
+
 
 export default function Page() {
   const imgSize = 201 / 2;
@@ -21,6 +24,9 @@ export default function Page() {
   const handleConcentrationChange = (value: string) => {
     setConcentration(value);
   };
+  const handleClearAll = () => {
+    
+  }
 
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
@@ -95,8 +101,8 @@ export default function Page() {
           <span className="text-slate-950 ml-2">mg per mL</span>
         </div>
         <div className="flex">
-          <h2 className="font-semibold text-lg">The result is:</h2>
-          <h2 className=" input input-bordered w-full max-w-xs border-dashed text-end text-lg bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
+          <h2 className="font-semibold text-lg mr-2">The result is:</h2>
+          <h2 className="input input-bordered w-full max-w-xs border-dashed text-end text-lg bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
             {Number(weight) > 0 &&
             Number(dosage) > 0 &&
             Number(concentration) > 0 &&
@@ -112,17 +118,20 @@ export default function Page() {
                 mL
               </>
             ) : (
-              <span className="ml-3">
+              <span className="">
                 <NanError />
               </span>
             )}
           </h2>
         </div>
+        <div className=''>
+          <ClearAllButton />
+        </div>
       </div>
-      <h1 className="font-semibold text-xl ml-6 mt-4">Formula: </h1>
+      <h1 className="font-semibold text-2xl ml-6 mt-4">Formula: </h1>
       <div className="flex items-center ml-8">
         {" "}
-        <span className="mr-1 text-lg">
+        <span className="mr-1 text-xl">
           {Number(weight) > 0 &&
           Number(dosage) > 0 &&
           Number(concentration) > 0 &&
