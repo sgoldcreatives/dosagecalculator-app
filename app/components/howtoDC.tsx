@@ -50,9 +50,9 @@ export function HowToDC() {
                     How to use the Custom Dosage Calculator
                   </AlertDialogTitle>
                   <AlertDialogDescription className="text-md text-slate-900">
-                    Enter the following information: Patient&APOS;s weight, dosage,
-                    and the concentration (optional). The system will then
-                    calculate the prescription for you.
+                    Enter the following information: Patient&apos;s weight,
+                    dosage, and the concentration (optional). The system will
+                    then calculate the prescription for you.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
