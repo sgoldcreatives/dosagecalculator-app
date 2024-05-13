@@ -6,7 +6,13 @@ export function ClearAllButton() {
   };
   return (
     <div>
-      <Button variant='destructive' onClick={handleReload}>Clear All</Button>
+      <Button
+        className="flex items-center border-2 border-red-300 rounded-md px-4 py-2 bg-red-50 text-red-700
+               hover:bg-red-700 hover:text-white transition duration-300 ease-in-out"
+        onClick={handleReload}
+      >
+        Clear All
+      </Button>
     </div>
   );
 }

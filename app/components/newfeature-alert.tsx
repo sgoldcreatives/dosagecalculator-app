@@ -5,12 +5,12 @@ import { QuestionMarkCircledIcon, Pencil2Icon } from "@radix-ui/react-icons";
 
 export function AlertNewFeature() {
   return (
-    <div className="bg-slate-200 border-2 h-24 rounded-md border-slate-500 text-sm inline-block align-middle p-2 m-4 ml-9">
+    <div className="bg-slate-200 border-2 ml-4 mt-2 rounded-md border-slate-500 text-xs inline-block align-middle p-2">
       <h3 className="font-bold italic">Heads up!</h3>
       <p>You can now create and calculate your own custom dosages!</p>
       <p>
         To do so, click on the{" "}
-        <Pencil2Icon className="h-8 w-8 inline-block align-middle border-2 border-slate-300 rounded-md p-1" />{" "}
+        <Pencil2Icon className="h-6 w-6 inline-block align-middle border-2 border-slate-300 rounded-md p-1" />{" "}
         icon!
       </p>
     </div>

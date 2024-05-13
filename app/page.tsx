@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   MagnifyingGlassIcon,
   QuestionMarkCircledIcon,
-  HomeIcon,
 } from "@radix-ui/react-icons";
 import { DataTable } from "./components/data-table";
 import { NanError } from "./components/nanError";
@@ -151,6 +150,7 @@ export default function Home() {
       accessorKey: "dosageForm",
       header: "Dosage Form",
     },
+    
   ];
 
   return (
@@ -202,7 +202,7 @@ export default function Home() {
       <div className="">
         <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-4 pb-3 px-3 max-w-screen-md text-slate-950">
           <div className="flex items-center">
-            <div className="flex items-center">
+            <div className="flex items-center font-semibold">
               Enter patient&apos;s weight:
               <div className="pl-4 pt-1">
                 <div className="pt-5 flex items-center">
@@ -212,14 +212,13 @@ export default function Home() {
                     placeholder=""
                     onChange={(e) => setWeight(e.target.value)}
                   />
-                  <span className="text-slate-950 ml-2">lbs</span>
+                  <span className="text-slate-950 ml-2 font-normal">lbs</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="pl-4 mt-8 flex">
-            <p>Weight in kg:</p>
-            <p className="ml-2 input input-bordered w-full max-w-xs text-lg text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-dashed border-2 text-slate-950">
+          <div className="pl-4 mt-8 flex text-xl">
+            <p className="input input-bordered w-full max-w-xs text-xl text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-dashed border-2 text-slate-950">
               {Number(weight) > 0 && !isNaN(Number(weight)) ? (
                 lbsToKg(Number(weight)).toFixed(1)
               ) : (

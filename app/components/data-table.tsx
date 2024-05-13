@@ -20,6 +20,7 @@ import { MoreHorizontal } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Check, ChevronsUpDown } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,7 +45,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { dosageForm } from "./combobox-data";
+import { dosageForm, tags } from "./combobox-data";
 import { DialogBox } from "./dialogbox";
 
 interface DataTableProps<TData, TValue> {
@@ -75,19 +76,21 @@ export function DataTable<TData, TValue>({
   });
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  
 
   return (
-    <div className="text-slate-950">
+    <div className="text-slate-950 ml-2">
       <div>
         <div className="flex items-center py-4">
           <Input
-            placeholder="Filter by name..."
+            placeholder="Search by name..."
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("name")?.setFilterValue(event.target.value)
             }
             className="max-w-sm bg-violet-100 border-2 border-violet-300"
           />
+          
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button
