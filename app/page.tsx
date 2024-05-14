@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { medications, Med } from "./components/columns";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,16 +24,48 @@ import Link from "next/link";
 import { AlertNewFeature } from "./components/newfeature-alert";
 import { ClearAllButton } from "./components/clearall-button";
 import { FeedbackReport } from "./components/feedbackreport";
+import { Checkbox } from "@/components/ui/checkbox";
+import PrintPDFButton from "./components/printbutton";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
 }
 type User = (typeof medications)[0];
+export const Context = React.createContext();
 
 export default function Home() {
-  const [weight, setWeight] = useState("");
+  const [selectedRows, setSelectedRows] = useState<Med[]>([]);
+const [weight, setWeight] = useState("");
+
   const data = medications;
   const columns: ColumnDef<Med>[] = [
+    {
+      id: "select",
+      header: ({ table }) => (
+        <span>
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+          />
+          <span className="ml-2">Select All</span>
+        </span>
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
     {
       id: "Instructions",
       cell: ({ row }) => {
@@ -150,10 +182,32 @@ export default function Home() {
     },
   ];
 
+  // useEffect(() => {
+  //   // Accessing selected rows from TanStack table
+  //   const selectedRowsFromTable = table.getSelectedRowModel().rows;
+  //   // Calculating dosage for selected rows
+  //   const selectedRowsWithCalculatedValues = selectedRowsFromTable.map(
+  //     (row: { dosage: string; name: any; }) => {
+  //       const dosage = parseFloat(row.dosage);
+  //       const calculated = dosage * Number(weight);
+  //       return {
+  //         name: row.name,
+  //         dosage: row.dosage,
+  //         calculated:
+  //           !isNaN(calculated) && calculated > 0
+  //             ? calculated.toFixed(2) + " cc"
+  //             : "Error",
+  //       };
+  //     }
+  //   );
+  //   // Update selectedRows state with calculated values
+  //   setSelectedRows(selectedRowsWithCalculatedValues);
+  // }, [table, weight]);
+
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
       <div className="">
-        <Title/>
+        <Title />
         <div className="flex ml-4">
           <Link
             href="/additionalapps"
@@ -178,7 +232,7 @@ export default function Home() {
           <AlertNewFeature />
         </div>
       </div>
-
+      <div></div>
       <div className="">
         <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-4 pb-3 px-3 max-w-screen-md text-slate-950">
           <div className="flex items-center">
@@ -208,7 +262,9 @@ export default function Home() {
               )}
             </p>
             <span className="text-slate-950 ml-2 mt-2.5">kgs</span>
-            <span className="ml-10">
+          </div>
+          <div className="flex mt-4">
+            <span className="">
               <DisclaimerBox />
             </span>
             <span className="ml-4">
@@ -217,13 +273,17 @@ export default function Home() {
             <span>
               <FeedbackReport />
             </span>
+            <span></span>
           </div>
         </div>
       </div>
       <div className="m-2">
-        <DataTable columns={columns} data={data} />
+        <Context.Provider value={[weight, setWeight]}>
+          <DataTable columns={columns} data={data} />
+        </Context.Provider>
       </div>
       <Footer />
     </main>
   );
 }
+

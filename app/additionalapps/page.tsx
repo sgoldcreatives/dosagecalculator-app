@@ -5,7 +5,6 @@ import { NanError } from "../components/nanError";
 import { Footer } from "../components/footer";
 import TextInput from "../textinput";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ClearAllButton } from "../components/clearall-button";
 import { HowToDC } from "../components/howtoDC";
 import { Title } from "../title";
@@ -26,8 +25,7 @@ export default function Page() {
   const handleConcentrationChange = (value: string) => {
     setConcentration(value);
   };
-  const handleClearAll = () => {};
-
+  
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
       <Title />
