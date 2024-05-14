@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ClearAllButton } from "../components/clearall-button";
 import { HowToDC } from "../components/howtoDC";
 import { Title } from "../title";
+import { FeedbackReport } from "../components/feedbackreport";
 const logoUrl = "/logo-clinic.png";
 
 export default function Page() {
@@ -58,7 +59,9 @@ export default function Page() {
           <h1 className="text-3xl font-semibold mt-2 mb-2 text-slate-950">
             Custom Dosage Calculator
           </h1>
-          <HowToDC />
+          <div className="flex">
+            <HowToDC />
+          </div>
         </div>
         <div className="flex items-center">
           <TextInput
@@ -116,55 +119,59 @@ export default function Page() {
             )}
           </h2>
         </div>
-        <div className="">
+        <div className="flex">
           <ClearAllButton />
+          <span className="">
+            <FeedbackReport />
+          </span>{" "}
         </div>
       </div>
-      <h1 className="font-semibold text-2xl ml-6 mt-4">Formula: </h1>
-      <div className="flex items-center ml-8">
-        {" "}
-        <span className="mr-1 text-xl">
-          {Number(weight) > 0 &&
-          Number(dosage) > 0 &&
-          Number(concentration) > 0 &&
-          !isNaN(Number(weight)) &&
-          !isNaN(Number(dosage)) &&
-          !isNaN(Number(concentration)) ? (
-            <>
-              The result is:{" "}
-              <span className="font-bold stacked-fractions">
-                (
-                <span className="inline-block border-solid border-b-2 border-black pb-1">
-                  {Number(weight)}
-                </span>{" "}
-                / 1 ) * ( 1 /
-                <span className="inline-block border-solid border-b-2 border-black pb-1">
-                  2.2
+      <div className="">
+        <h1 className="font-semibold text-2xl ml-6 mt-4">Formula: </h1>
+        <div className="flex items-center ml-8">
+          {" "}
+          <span className="mr-1 text-xl">
+            {Number(weight) > 0 &&
+            Number(dosage) > 0 &&
+            Number(concentration) > 0 &&
+            !isNaN(Number(weight)) &&
+            !isNaN(Number(dosage)) &&
+            !isNaN(Number(concentration)) ? (
+              <>
+                The result is:{" "}
+                <span className="font-bold stacked-fractions">
+                  (
+                  <span className="inline-block border-solid border-b-2 border-black pb-1">
+                    {Number(weight)}
+                  </span>{" "}
+                  / 1 ) * ( 1 /
+                  <span className="inline-block border-solid border-b-2 border-black pb-1">
+                    2.2
+                  </span>
+                  ) * (
+                  <span className="inline-block border-solid border-b-2 border-black pb-1">
+                    {Number(dosage)}
+                  </span>{" "}
+                  / 1 ) * ( 1 /
+                  <span className="inline-block border-solid border-b-2 border-black pb-1">
+                    {Number(concentration)}
+                  </span>
+                  )
                 </span>
-                ) * (
-                <span className="inline-block border-solid border-b-2 border-black pb-1">
-                  {Number(dosage)}
-                </span>{" "}
-                / 1 ) * ( 1 /
-                <span className="inline-block border-solid border-b-2 border-black pb-1">
-                  {Number(concentration)}
-                </span>
-                )
-              </span>
-              {"= "}
-              {(
-                ((Number(weight) / 2.2) * Number(dosage)) /
-                Number(concentration)
-              ).toFixed(2)}{" "}
-              mL
-            </>
-          ) : (
-            <NanError />
-          )}
-        </span>
+                {"= "}
+                {(
+                  ((Number(weight) / 2.2) * Number(dosage)) /
+                  Number(concentration)
+                ).toFixed(2)}{" "}
+                mL
+              </>
+            ) : (
+              <NanError />
+            )}
+          </span>
+        </div>
       </div>
-
-      <div className="fixed bottom-0 left-0 p-5">
+      <div className="mt-5">
         <Footer />
       </div>
     </main>

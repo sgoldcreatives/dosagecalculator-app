@@ -23,6 +23,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { AlertNewFeature } from "./components/newfeature-alert";
 import { ClearAllButton } from "./components/clearall-button";
+import { FeedbackReport } from "./components/feedbackreport";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
@@ -212,6 +213,9 @@ export default function Home() {
             </span>
             <span className="ml-4">
               <ClearAllButton />
+            </span>
+            <span>
+              <FeedbackReport />
             </span>
           </div>
         </div>
