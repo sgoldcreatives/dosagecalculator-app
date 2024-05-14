@@ -30,7 +30,7 @@ function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
 }
 type User = (typeof medications)[0];
-export const Context = React.createContext();
+
 
 export default function Home() {
   const [weight, _setWeight] = useState("");
@@ -250,7 +250,6 @@ export default function Home() {
               <span>
                 <FeedbackReport />
               </span>
-              <span></span>
             </div>
           </div>
         </div>
@@ -262,3 +261,4 @@ export default function Home() {
     </Context.Provider>
   );
 }
+export const Context = React.createContext();
