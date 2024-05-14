@@ -16,7 +16,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-
 export function HowToDC() {
   return (
     <div>
