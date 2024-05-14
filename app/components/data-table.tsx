@@ -48,7 +48,6 @@ import {
 } from "@tanstack/react-table";
 import { dosageForm, tags } from "./combobox-data";
 import { DialogBox } from "./dialogbox";
-import PrintPDFButton from "./printbutton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -82,7 +81,7 @@ export function DataTable<TData, TValue>({
   });
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  const [weight, setWeight] = React.useContext(Context);
+  const [weight] = React.useContext(Context);
 
   const generatePDF = () => {
     const filteredRows = table
@@ -91,7 +90,7 @@ export function DataTable<TData, TValue>({
       .map((row: any) => {
         const name = row.getValue("name");
         const dosage = row.getValue("dosage") * Number(weight);
-        return `${name}: ${dosage} mL`;
+        return `${name}: ${dosage}cc`;
       });
 
     const doc = new jsPDF();
@@ -106,7 +105,20 @@ export function DataTable<TData, TValue>({
   return (
     <div className="text-slate-950 ml-2">
       <div>
-        <div className=""></div>
+        <div className="">
+          {table
+            .getSelectedRowModel()
+            .rows.filter((row: any) => !row.isSelected) // Filter rows based on selection status
+            .map((row: any) => {
+              console.log("Filtered row:", row); // Log filtered row
+              return (
+                <p key={row.id}>
+                  {row.getValue("name") +
+                    row.getValue("dosage") * Number(weight)}
+                </p>
+              );
+            })}
+        </div>
         <div className="flex items-center py-4">
           <Button
             onClick={generatePDF}
