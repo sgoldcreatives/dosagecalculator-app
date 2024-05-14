@@ -190,7 +190,7 @@ export default function Home() {
                 </svg>
                 <span className="ml-1">
                   {" "}
-                  Custom Dosage Calculator (Experimental)
+                  Custom Dosage Calculator
                 </span>
               </Link>
               <AlertNewFeature />

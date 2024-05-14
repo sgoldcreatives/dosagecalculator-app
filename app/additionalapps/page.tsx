@@ -140,7 +140,7 @@ export default function Page() {
           !isNaN(Number(concentration)) ? (
             <>
               The result is:{" "}
-              <span className="font-bold">
+              <span className="font-bold stacked-fractions">
                 (
                 <span className="inline-block border-solid border-b-2 border-black pb-1">
                   {Number(weight)}

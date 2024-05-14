@@ -42,7 +42,7 @@ export function HowToDC() {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                How to
+                <p className='ml-1'> How to</p>
               </AlertDialogTrigger>
               <AlertDialogContent className="border-4 border-green-500">
                 <AlertDialogHeader>
