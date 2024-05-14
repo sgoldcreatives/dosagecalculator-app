@@ -5,7 +5,7 @@ import { QuestionMarkCircledIcon, Pencil2Icon } from "@radix-ui/react-icons";
 
 export function AlertNewFeature() {
   return (
-    <div className="bg-slate-200 border-2 ml-4 mt-2 rounded-md border-slate-500 text-xs inline-block align-middle p-2">
+    <div className="bg-slate-200 border-2 ml-4 mt-2 shadow-md rounded-md border-slate-500 text-xs inline-block align-middle p-2">
       <h3 className="font-bold italic flex">
         <svg
           width="15"
@@ -20,8 +20,9 @@ export function AlertNewFeature() {
             fill-rule="evenodd"
             clip-rule="evenodd"
           ></path>
-        </svg>{"  "}
-         Heads up!
+        </svg>
+        {"  "}
+        Heads up!
       </h3>
       <p>You can now create and calculate your own custom dosages!</p>
       <p>

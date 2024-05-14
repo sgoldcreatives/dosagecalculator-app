@@ -16,12 +16,12 @@ export function DisclaimerBox() {
       <AlertDialogTrigger asChild>
         <Button
           className="flex items-center border-2 border-orange-300 rounded-md px-4 py-2 bg-orange-50 text-orange-500
-               hover:bg-orange-500 hover:text-white transition duration-300 ease-in-out"
+               hover:bg-orange-500 hover:text-white transition shadow-md duration-300 ease-in-out"
         >
           Dosage Disclaimer
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className='border-orange-500 border-4'>
+      <AlertDialogContent className="border-orange-500 border-4">
         <AlertDialogHeader>
           <AlertDialogTitle>Disclaimer:</AlertDialogTitle>
           <AlertDialogDescription className="text-lg text-slate-800">

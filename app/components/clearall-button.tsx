@@ -8,7 +8,7 @@ export function ClearAllButton() {
     <div>
       <Button
         className="flex items-center border-2 border-red-300 rounded-md px-4 py-2 bg-red-50 text-red-700
-               hover:bg-red-700 hover:text-white transition duration-300 ease-in-out"
+               hover:bg-red-700 hover:text-white shadow-md transition duration-300 ease-in-out"
         onClick={handleReload}
       >
         Clear All

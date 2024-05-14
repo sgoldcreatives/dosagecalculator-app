@@ -41,11 +41,11 @@ export default function Page() {
           <h1 className="text-5xl font-semibold mt-2 text-slate-950">
             Custom Dosage Calculator
           </h1>
-          <div className='flex'>
+          <div className="flex">
             <Link
               href="/"
               className="flex items-center mt-2 border-2 border-violet-300 rounded-md px-4 py-2 bg-white text-violet-700
-               hover:bg-violet-700 hover:text-white transition duration-300 ease-in-out w-1/3"
+               hover:bg-violet-700 shadow-md hover:text-white transition duration-300 ease-in-out w-1/3"
             >
               <svg
                 width="15"

@@ -26,7 +26,7 @@ export function HowToDC() {
             <AlertDialog>
               <AlertDialogTrigger
                 className="flex items-center ml-5 mt-2 border-2 border-green-500 rounded-md px-4 py-2 bg-white text-green-700
-               hover:bg-green-700 hover:text-white transition duration-300 ease-in-out"
+               hover:bg-green-700 shadow-md hover:text-white transition duration-300 ease-in-out"
               >
                 <svg
                   width="15"
@@ -42,7 +42,7 @@ export function HowToDC() {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <p className='ml-1'> How to</p>
+                <p className="ml-1"> How to</p>
               </AlertDialogTrigger>
               <AlertDialogContent className="border-4 border-green-500">
                 <AlertDialogHeader>
