@@ -223,7 +223,7 @@ export default function Home() {
                       className="input pb-2 input-bordered w-full max-w-xs font-normal text-end text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
                       value={weight}
                       placeholder=""
-                      onChange={(e) => setWeight(e.target.value)}
+                      onChange={(e) => _setWeight(e.target.value)}
                     />
                     <div className="text-slate-950 ml-2 font-normal">lbs</div>
                   </div>
