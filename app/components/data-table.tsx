@@ -9,6 +9,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import jsPDF from "jspdf";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   Dialog,
   DialogContent,
@@ -20,6 +22,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,6 +51,7 @@ import { dosageForm, tags } from "./combobox-data";
 import { DialogBox } from "./dialogbox";
 import { useContext } from "react";
 import { usePatientContext } from "../context";
+import { toast } from "sonner";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -90,7 +94,9 @@ export function DataTable<TData, TValue>({
         const name = row.getValue("name");
         const dosage = row.getValue("dosage");
         const calculated = (dosage * patient.pweight).toFixed(1); // Round to 1 decimal point
-        return `${name} (${row.getValue('concentration')}): ${calculated} cc - (${row.getValue('dosageForm')})`;
+        return `${name} (${row.getValue(
+          "concentration"
+        )}): ${calculated} cc - (${row.getValue("dosageForm")})`;
       });
 
     const doc = new jsPDF();
@@ -109,17 +115,121 @@ export function DataTable<TData, TValue>({
     doc.save(`${patient.pname || "Unknown"}_prescriptionlist.pdf`);
   };
 
-
   const patient = usePatientContext();
+
+  function handlePrintToPDF() {
+    if (
+      table.getFilteredSelectedRowModel().rows.length !== 0 &&
+      !isNaN(patient.pweight) &&
+      patient.pname !== ""
+    ) {
+      return generatePDF();
+    } else {
+      return toastError();
+    }
+  }
+  function toastError() {
+    const toastId = toast.error(
+      <div>
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.4449 0.608765C8.0183 -0.107015 6.9817 -0.107015 6.55509 0.608766L0.161178 11.3368C-0.275824 12.07 0.252503 13 1.10608 13H13.8939C14.7475 13 15.2758 12.07 14.8388 11.3368L8.4449 0.608765ZM7.4141 1.12073C7.45288 1.05566 7.54712 1.05566 7.5859 1.12073L13.9798 11.8488C14.0196 11.9154 13.9715 12 13.8939 12H1.10608C1.02849 12 0.980454 11.9154 1.02018 11.8488L7.4141 1.12073ZM6.8269 4.48611C6.81221 4.10423 7.11783 3.78663 7.5 3.78663C7.88217 3.78663 8.18778 4.10423 8.1731 4.48612L8.01921 8.48701C8.00848 8.766 7.7792 8.98664 7.5 8.98664C7.2208 8.98664 6.99151 8.766 6.98078 8.48701L6.8269 4.48611ZM8.24989 10.476C8.24989 10.8902 7.9141 11.226 7.49989 11.226C7.08567 11.226 6.74989 10.8902 6.74989 10.476C6.74989 10.0618 7.08567 9.72599 7.49989 9.72599C7.9141 9.72599 8.24989 10.0618 8.24989 10.476Z"
+            fill="currentColor"
+            fillRule="evenodd"
+            clipRule="evenodd"
+          ></path>
+        </svg>
+        <div>Error generating PDF document</div>
+        <div className="text-slate-400 italic">
+          {patient.pname === "" && <div>Patient name is empty</div>}
+          {patient.pweight === 0 && <div>Patient weight is zero</div>}
+          {table.getFilteredSelectedRowModel().rows.length === 0 && (
+            <div>No rows are selected</div>
+          )}
+        </div>
+        <button
+          onClick={() => toast.dismiss(toastId)}
+          style={{
+            backgroundColor: "red",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            marginTop: "10px",
+          }}
+        >
+          OK
+        </button>
+      </div>,
+      {
+        style: {
+          border: "2px solid red",
+          backgroundColor: "white",
+          color: "red",
+          padding: "10px",
+          fontSize: "16px",
+        },
+      }
+    );
+  }
+  function toastError_rowNotselected() {
+    const toastId = toast.error(
+      <div>
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.4449 0.608765C8.0183 -0.107015 6.9817 -0.107015 6.55509 0.608766L0.161178 11.3368C-0.275824 12.07 0.252503 13 1.10608 13H13.8939C14.7475 13 15.2758 12.07 14.8388 11.3368L8.4449 0.608765ZM7.4141 1.12073C7.45288 1.05566 7.54712 1.05566 7.5859 1.12073L13.9798 11.8488C14.0196 11.9154 13.9715 12 13.8939 12H1.10608C1.02849 12 0.980454 11.9154 1.02018 11.8488L7.4141 1.12073ZM6.8269 4.48611C6.81221 4.10423 7.11783 3.78663 7.5 3.78663C7.88217 3.78663 8.18778 4.10423 8.1731 4.48612L8.01921 8.48701C8.00848 8.766 7.7792 8.98664 7.5 8.98664C7.2208 8.98664 6.99151 8.766 6.98078 8.48701L6.8269 4.48611ZM8.24989 10.476C8.24989 10.8902 7.9141 11.226 7.49989 11.226C7.08567 11.226 6.74989 10.8902 6.74989 10.476C6.74989 10.0618 7.08567 9.72599 7.49989 9.72599C7.9141 9.72599 8.24989 10.0618 8.24989 10.476Z"
+            fill="currentColor"
+            fillRule="evenodd"
+            clipRule="evenodd"
+          ></path>
+        </svg>
+        <div>Error generating PDF document</div>
+        <div className="text-slate-400 italic">
+          Please select at least one row before printing.
+        </div>
+        <button
+          onClick={() => toast.dismiss(toastId)}
+          style={{
+            backgroundColor: "red",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            marginTop: "10px",
+          }}
+        >
+          OK
+        </button>
+      </div>,
+      {
+        style: {
+          border: "2px solid red",
+          backgroundColor: "white",
+          color: "red",
+          padding: "10px",
+          fontSize: "16px",
+        },
+      }
+    );
+  }
 
   return (
     <div className="text-slate-950 ml-2">
       <div>
         <div className="flex items-center py-4">
           <Button
-            onClick={generatePDF}
-            className="mr-8 flex items-center border-2 border-gray-500 rounded-md px-4 py-2 bg-gray-100 text-gray-800
-               hover:bg-gray-800 shadow-md hover:text-white transition duration-300 ease-in-out"
+            onClick={handlePrintToPDF}
+            className="mr-8 flex items-center border-2 border-gray-500 rounded-md px-4 py-2 bg-gray-100 text-gray-800 hover:bg-gray-800 shadow-md hover:text-white transition duration-300 ease-in-out"
           >
             <svg
               width="15"
@@ -241,6 +351,7 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      <Toaster></Toaster>
     </div>
   );
 }
