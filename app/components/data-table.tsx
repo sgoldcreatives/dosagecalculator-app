@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { MoreHorizontal } from "lucide-react";
-import { Context } from "../page";
+import { Context } from "../vetdose";
 import { Input } from "@/components/ui/input";
 import { Check, ChevronsUpDown } from "lucide-react";
 
