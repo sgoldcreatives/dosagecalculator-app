@@ -71,7 +71,7 @@ export function HowToDC() {
                           <br />
                           <strong>Filter by Dosage Form:</strong> Allows you to
                           filter out a specific dosage form (ie: to show only
-                          oral meds select `Oral`)
+                          oral meds select &apos;Oral&apos;)
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="item-2">
@@ -160,14 +160,15 @@ export function HowToDC() {
                         <AccordionTrigger>Printing to PDF</AccordionTrigger>
                         <AccordionContent>
                           <strong>To print to PDF:</strong>
-                          <br /> <strong>1.</strong> Ensure that both the 'Patient
-                          Name' and 'Patient Weight' fields have values entered.
+                          <br /> <strong>1.</strong> Ensure that both the
+                          &apos;Patient Name&apos; and &apos;Patient Weight&apos; fields have values
+                          entered.
                           <br />
-                          <strong>2.</strong> Select the medications by clicking on the square
-                          on the left-hand side of each row.
+                          <strong>2.</strong> Select the medications by clicking
+                          on the square on the left-hand side of each row.
                           <br />
-                          <strong>3.</strong> locate and click the 'Print to PDF'
-                          button to generate the PDF document.
+                          <strong>3.</strong> locate and click the &apos;Print
+                          to PDF&apos; button to generate the PDF document.
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>
