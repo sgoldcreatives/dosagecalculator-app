@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { medications, Med } from "./components/columns";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,15 +25,39 @@ import { AlertNewFeature } from "./components/newfeature-alert";
 import { ClearAllButton } from "./components/clearall-button";
 import { FeedbackReport } from "./components/feedbackreport";
 import { Checkbox } from "@/components/ui/checkbox";
+import { WeightContext } from "./context";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
 }
 type User = (typeof medications)[0];
-export const Context = React.createContext();
-
+export interface PatientProfile {
+  pname: string;
+  pweight: number;
+}
 export function VetDose() {
-  const [weight, _setWeight] = useState("");
+  const [patientProfile, setPatientProfile] = useState<PatientProfile>({
+    pname: "",
+    pweight: 0,
+  });
+
+  const updatePatientProfile = (patient: Partial<PatientProfile>) => {
+    setPatientProfile((prevPatientProfile) => ({
+      ...prevPatientProfile,
+      ...patient,
+    }));
+  };
+
+  // Handler for the name change
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    updatePatientProfile({ pname: event.target.value });
+  };
+
+  // Handler for the age change
+  const handleWeightChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const pweight = parseInt(event.target.value, 10);
+    updatePatientProfile({ pweight: isNaN(pweight) ? 0 : pweight });
+  };
 
   const data = medications;
   const columns: ColumnDef<Med>[] = [
@@ -69,7 +93,7 @@ export function VetDose() {
       cell: ({ row }) => {
         const medications = row.original;
         const dosage = parseFloat(row.getValue("dosage"));
-        const calculated = dosage * Number(weight);
+        const calculated = dosage * patientProfile.pweight;
         return (
           <Dialog>
             <DialogTrigger>
@@ -157,7 +181,7 @@ export function VetDose() {
       header: "Dosage",
       cell: ({ row }) => {
         const dosage = parseFloat(row.getValue("dosage"));
-        const calculated = dosage * Number(weight);
+        const calculated = dosage * patientProfile.pweight;
 
         return (
           <div className="text-left font-medium">
@@ -181,8 +205,8 @@ export function VetDose() {
   ];
 
   return (
-    <Context.Provider value={[weight, _setWeight]}>
-      <main className="h-screen bg-sky-100 overflow-auto">
+    <main className="h-screen bg-sky-100 overflow-auto">
+      <WeightContext.Provider value={patientProfile}>
         <div className="">
           <Title />
           <div className="flex ml-4">
@@ -209,31 +233,44 @@ export function VetDose() {
             <AlertNewFeature />
           </div>
         </div>
-        <div></div>
         <div className="">
           <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-4 pb-3 px-3 max-w-screen-md text-slate-950">
-            <div className="flex items-center">
-              <div className="flex items-center font-semibold">
-                <div className="mt-3 rounded-md bg-violet-100 border-violet-100 border-2 border-b-violet-500">
-                  <p className="ml-6 opacity-60 font-normal text-sm">
-                    Patient&apos;s weight
-                  </p>
-                  <div className="flex items-center">
-                    <input
-                      className="input pb-2 input-bordered w-full max-w-xs font-normal text-end text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
-                      value={weight}
-                      placeholder=""
-                      onChange={(e) => _setWeight(e.target.value)}
-                    />
-                    <div className="text-slate-950 ml-2 font-normal">lbs</div>
-                  </div>
+            <div className="items-center">
+              <div className="mt-3 rounded-md bg-violet-100 max-w-xs w-auto border-violet-100 border-2 border-b-violet-500">
+                <p className="ml-6 opacity-60 font-normal text-sm">
+                  Patient&apos;s name
+                </p>
+                <div className="flex items-center">
+                  <input
+                    className="input pb-2 input-bordered w-full font-normal text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
+                    value={patientProfile.pname}
+                    placeholder=""
+                    onChange={handleNameChange}
+                  />
+                  <div className="text-slate-950 ml-2 font-normal"></div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center font-semibold">
+              <div className="mt-3 rounded-md bg-violet-100 border-violet-100 border-2 border-b-violet-500">
+                <p className="ml-6 opacity-60 font-normal text-sm">
+                  Patient&apos;s weight
+                </p>
+                <div className="flex items-center">
+                  <input
+                    className="input pb-2 input-bordered w-full max-w-xs font-normal text-end text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
+                    value={patientProfile.pweight}
+                    placeholder=""
+                    onChange={handleWeightChange}
+                  />
+                  <div className="text-slate-950 ml-2 font-normal">lbs</div>
                 </div>
               </div>
             </div>
             <div className=" mt-4 flex text-xl">
               <p className="input input-bordered w-full max-w-xs text-xl text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-dashed border-2 text-slate-950">
-                {Number(weight) > 0 && !isNaN(Number(weight)) ? (
-                  lbsToKg(Number(weight)).toFixed(1)
+                {patientProfile.pweight > 0 ? (
+                  lbsToKg(patientProfile.pweight).toFixed(1)
                 ) : (
                   <NanError />
                 )}
@@ -257,7 +294,7 @@ export function VetDose() {
           <DataTable columns={columns} data={data} />
         </div>
         <Footer />
-      </main>
-    </Context.Provider>
+      </WeightContext.Provider>
+    </main>
   );
 }

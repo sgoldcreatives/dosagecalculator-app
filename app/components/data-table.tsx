@@ -18,10 +18,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { MoreHorizontal } from "lucide-react";
-import { Context } from "../vetdose";
 import { Input } from "@/components/ui/input";
 import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,6 +46,8 @@ import {
 } from "@tanstack/react-table";
 import { dosageForm, tags } from "./combobox-data";
 import { DialogBox } from "./dialogbox";
+import { useContext } from "react";
+import { usePatientContext } from "../context";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -81,7 +81,6 @@ export function DataTable<TData, TValue>({
   });
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  const [weight] = React.useContext(Context);
 
   const generatePDF = () => {
     const filteredRows = table
@@ -89,36 +88,28 @@ export function DataTable<TData, TValue>({
       .rows.filter((row: any) => !row.isSelected) // Filter rows based on selection status
       .map((row: any) => {
         const name = row.getValue("name");
-        const dosage = row.getValue("dosage") * Number(weight);
-        return `${name}: ${dosage}cc`;
+        const dosage = row.getValue("dosage");
+        const calculated = dosage * patient.pweight;
+        return `${name}: ${calculated}cc`;
       });
 
     const doc = new jsPDF();
 
+    // Add patient's name as a header
+    doc.text(`Patient Name: ${patient.pname || "Unknown"}`, 10, 10);
+
     filteredRows.forEach((rowString, index) => {
-      doc.text(rowString, 10, 10 + index * 10);
+      doc.text(rowString, 10, 20 + index * 10); // Adjust the y-coordinate as needed
     });
 
-    doc.save("filtered_rows.pdf");
+    doc.save(`prescriptionlist.pdf`);
   };
+
+  const patient = usePatientContext();
 
   return (
     <div className="text-slate-950 ml-2">
       <div>
-        <div className="">
-          {table
-            .getSelectedRowModel()
-            .rows.filter((row: any) => !row.isSelected) // Filter rows based on selection status
-            .map((row: any) => {
-              console.log("Filtered row:", row); // Log filtered row
-              return (
-                <p key={row.id}>
-                  {row.getValue("name") +
-                    row.getValue("dosage") * Number(weight)}
-                </p>
-              );
-            })}
-        </div>
         <div className="flex items-center py-4">
           <Button
             onClick={generatePDF}
