@@ -89,21 +89,26 @@ export function DataTable<TData, TValue>({
       .map((row: any) => {
         const name = row.getValue("name");
         const dosage = row.getValue("dosage");
-        const calculated = dosage * patient.pweight;
-        return `${name}: ${calculated}cc`;
+        const calculated = (dosage * patient.pweight).toFixed(1); // Round to 1 decimal point
+        return `${name} (${row.getValue('concentration')}): ${calculated} cc - (${row.getValue('dosageForm')})`;
       });
 
     const doc = new jsPDF();
 
     // Add patient's name as a header
-    doc.text(`Patient Name: ${patient.pname || "Unknown"}`, 10, 10);
+    doc.setFontSize(16);
+    doc.text(`Prescription List for ${patient.pname || "Unknown"}`, 15, 15);
+
+    // Set font size and style for prescription details
+    doc.setFontSize(12);
 
     filteredRows.forEach((rowString, index) => {
-      doc.text(rowString, 10, 20 + index * 10); // Adjust the y-coordinate as needed
+      doc.text(rowString, 15, 30 + index * 10); // Adjust the y-coordinate as needed
     });
 
-    doc.save(`prescriptionlist.pdf`);
+    doc.save(`${patient.pname || "Unknown"}_prescriptionlist.pdf`);
   };
+
 
   const patient = usePatientContext();
 

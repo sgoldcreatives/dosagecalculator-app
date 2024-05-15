@@ -6,7 +6,7 @@ import { Footer } from "../components/footer";
 import TextInput from "../textinput";
 import Link from "next/link";
 import { ClearAllButton } from "../components/clearall-button";
-import { HowToDC } from "../components/howtoDC";
+import { HowToDC } from "../components/howtoCDC";
 import { Title } from "../title";
 import { FeedbackReport } from "../components/feedbackreport";
 const logoUrl = "/logo-clinic.png";

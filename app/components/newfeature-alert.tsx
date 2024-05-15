@@ -25,11 +25,7 @@ export function AlertNewFeature() {
         Heads up!
       </h3>
       <p>You can now create and calculate your own custom dosages!</p>
-      <p>
-        To do so, click on the{" "}
-        <Pencil2Icon className="h-6 w-6 inline-block align-middle border-2 border-slate-300 rounded-md p-1" />{" "}
-        icon!
-      </p>
+      
     </div>
   );
 }
