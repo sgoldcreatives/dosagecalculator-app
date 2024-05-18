@@ -6,26 +6,81 @@ import { Footer } from "../components/footer";
 import TextInput from "../textinput";
 import Link from "next/link";
 import { ClearAllButton } from "../components/clearall-button";
-import { HowToCDC } from "../components/howtoCDC";
+import { HowToCDC } from "../components/howToComponents/howtoCDC";
 import { Title } from "../title";
 import { FeedbackReport } from "../components/feedbackreport";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 const logoUrl = "/logo-clinic.png";
+
+export interface PatientProfile {
+  pweight: string;
+  pmaxdosage: string;
+  pmindosage: string;
+  pconcentration: string;
+}
 
 export default function Page() {
   const imgSize = 201 / 2;
-  const [weight, setWeight] = useState("");
-  const [dosage, setDosage] = useState("");
-  const [concentration, setConcentration] = useState("");
-  const handleWeightChange = (value: string) => {
-    setWeight(value);
+
+  const [patientProfile, setPatientProfile] = useState<PatientProfile>({
+    pweight: "",
+    pmaxdosage: "",
+    pmindosage: "",
+    pconcentration: "",
+  });
+
+  const updatePatientProfile = (patient: Partial<PatientProfile>) => {
+    setPatientProfile((prevPatientProfile) => ({
+      ...prevPatientProfile,
+      ...patient,
+    }));
   };
-  const handleDosageChange = (value: string) => {
-    setDosage(value);
+
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const weight = e.target.value;
+    setPatientProfile({
+      ...patientProfile,
+      pweight: weight,
+    });
   };
-  const handleConcentrationChange = (value: string) => {
-    setConcentration(value);
+  const handleMaxDosageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dosage = e.target.value;
+    setPatientProfile({
+      ...patientProfile,
+      pmaxdosage: dosage,
+    });
   };
-  
+
+  const handleMinDosageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dosage = e.target.value;
+    setPatientProfile({
+      ...patientProfile,
+      pmindosage: dosage,
+    });
+  };
+  const handleConcentrationChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const concentration = e.target.value;
+    setPatientProfile({
+      ...patientProfile,
+      pconcentration: concentration,
+    });
+  };
+
+  const [showDosageComponent, setShowDosageComponent] = useState(false);
+
+  const handleDosageSwitchChange = (checked: boolean) => {
+    setShowDosageComponent(checked);
+  };
+
+  const [showConcentrationComponent, setShowConcentrationComponent] = useState(false);
+
+  const handleConcentrationSwitchChange = (checked: boolean) => {
+    setShowConcentrationComponent(checked);
+  };
+
   return (
     <main className="h-screen bg-sky-100 overflow-auto">
       <Title />
@@ -53,122 +108,234 @@ export default function Page() {
         </Link>
       </div>
       <div className="flex flex-col bg-slate-100 mb-4 rounded-md border-violet-300 border-2  max-w-full p-2 m-4 ">
-        <div className="mb-8">
-          <h1 className="text-3xl font-semibold mt-2 mb-2 text-slate-950">
+        <div className="mb-2">
+          <h1 className="text-3xl font-semibold mt-2 text-slate-950">
             Custom Dosage Calculator
           </h1>
-          <div className="flex">
-            <HowToCDC />
+        </div>
+        <div className="mb-8 ml-4">
+          <div>
+            <h3 className="italic text-slate-500 mb-1 ">Additional options</h3>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="minimum-dosage"
+              onCheckedChange={handleDosageSwitchChange}
+            />
+            <Label htmlFor="minimum-dosage" className="text-xs">
+              Add minimum dosage
+            </Label>
+          </div>
+          <div className="flex items-center space-x-2 mt-2">
+            <Switch
+              id="concentration"
+              onCheckedChange={handleConcentrationSwitchChange}
+            />
+            <Label htmlFor="concentration" className="text-xs">
+              Add concentration
+            </Label>
           </div>
         </div>
-        <div className="flex items-center">
-          <TextInput
-            label="Enter patient's weight"
-            onChange={handleWeightChange}
-          />
-          <span className="text-slate-950 ml-2">lbs</span>
+        <div className="items-center">
+          <div className="mt-3 rounded-md bg-violet-100 max-w-xs w-auto border-violet-100 border-2 border-b-violet-500">
+            <p className="ml-6 opacity-60 font-normal text-sm">
+              Patient&apos;s weight
+            </p>
+            <div className="flex items-center">
+              <input
+                className="input pb-2 input-bordered w-full font-normal text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
+                value={patientProfile.pweight}
+                placeholder="Enter weight..."
+                onChange={handleWeightChange}
+              />
+              <div className="text-slate-950 ml-2 font-normal">lb</div>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center mb-2">
-          <TextInput label="Enter the dosage" onChange={handleDosageChange} />
-          <span className="text-slate-950 ml-2">mg per kg</span>
+        <div>
+          {showDosageComponent && (
+            <div className="items-center">
+              <div className="mt-3 rounded-md bg-violet-100 max-w-xs w-auto border-violet-100 border-2 border-b-violet-500">
+                <p className="ml-6 opacity-60 font-normal text-sm">
+                  Patient&apos;s min dosage
+                </p>
+                <div className="flex items-center">
+                  <input
+                    className="input pb-2 input-bordered w-full font-normal text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
+                    value={patientProfile.pmindosage}
+                    placeholder="Enter dosage..."
+                    onChange={handleMinDosageChange}
+                  />
+                  <div className="text-slate-950 ml-2 font-normal">
+                    mg per kg
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="flex items-center mb-3">
+        <div className="flex">
+          <div className="items-center">
+            <div className="mt-3 rounded-md bg-violet-100 max-w-xs w-auto border-violet-100 border-2 border-b-violet-500">
+              <p className="ml-6 opacity-60 font-normal text-sm">
+                Patient&apos;s {showDosageComponent ? "max dosage" : "dosage"}
+              </p>
+              <div className="flex items-center">
+                <input
+                  className="input pb-2 input-bordered w-full font-normal text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
+                  value={patientProfile.pmaxdosage}
+                  placeholder="Enter dosage..."
+                  onChange={handleMaxDosageChange}
+                />
+                <div className="text-slate-950 ml-2 font-normal">mg per kg</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center mt-5 mb-5">
           <label className="mr-4 font-semibold">Prescription: </label>
-          <h2 className="input input-bordered w-full max-w-xs border-dashed text-end text-lg bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-2 text-slate-950">
-            {Number(weight) > 0 &&
-            Number(dosage) > 0 &&
-            !isNaN(Number(weight)) &&
-            !isNaN(Number(dosage)) ? (
-              ((Number(weight) / 2.2) * Number(dosage)).toFixed(1)
-            ) : (
-              <NanError />
-            )}
+          {showDosageComponent && ( //min dosage
+            <>
+              <h2 className="text-lg text-slate-950">
+                {Number(patientProfile.pweight) > 0 &&
+                Number(patientProfile.pmindosage) > 0 &&
+                !isNaN(Number(patientProfile.pweight)) &&
+                !isNaN(Number(patientProfile.pmindosage))
+                  ? (
+                      (Number(patientProfile.pweight) / 2.2) *
+                      Number(patientProfile.pmindosage)
+                    ).toFixed(1)
+                  : ""}
+              </h2>
+              <span className="text-slate-950 ml-2">mg</span>
+              <h2 className="ml-2 mr-2 text-lg font-semibold">to</h2>
+            </>
+          )}
+          <h2 className="text-lg text-slate-950">
+            {Number(patientProfile.pweight) > 0 && //max dosage
+            Number(patientProfile.pmaxdosage) > 0 &&
+            !isNaN(Number(patientProfile.pweight)) &&
+            !isNaN(Number(patientProfile.pmaxdosage))
+              ? (
+                  (Number(patientProfile.pweight) / 2.2) *
+                  Number(patientProfile.pmaxdosage)
+                ).toFixed(1)
+              : ""}
           </h2>
           <span className="text-slate-950 ml-2">mg</span>
         </div>
-        <div className="flex items-center">
-          <TextInput
-            label="Enter the concentration"
-            onChange={handleConcentrationChange}
-          />
-          <span className="text-slate-950 ml-2 ">mg per mL</span>
-        </div>
-        <div className="flex mt-6 mb-6">
-          <h2 className="font-semibold text-lg mr-2">The result is:</h2>
-          <h2 className="input input-bordered w-full max-w-xs text-lg rounded-md px-3 pt-2 text-slate-950">
-            {Number(weight) > 0 &&
-            Number(dosage) > 0 &&
-            Number(concentration) > 0 &&
-            !isNaN(Number(weight)) &&
-            !isNaN(Number(dosage)) &&
-            !isNaN(Number(concentration)) ? (
-              <>
-                {" "}
-                {(
-                  ((Number(weight) / 2.2) * Number(dosage)) /
-                  Number(concentration)
-                ).toFixed(2)}{" "}
-                mL
-              </>
-            ) : (
-              <span className="">
-                <br />
-              </span>
-            )}
-          </h2>
-        </div>
+
+        {showConcentrationComponent && (
+          <>
+            <div className="items-center">
+              <div className="mt-3 rounded-md bg-violet-100 max-w-xs w-auto border-violet-100 border-2 border-b-violet-500">
+                <p className="ml-6 opacity-60 font-normal text-sm">
+                  Enter concentration
+                </p>
+                <div className="flex items-center">
+                  <input
+                    className="input pb-2 input-bordered w-full font-normal text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
+                    value={patientProfile.pconcentration}
+                    placeholder="Enter concentration..."
+                    onChange={handleConcentrationChange}
+                  />
+                  <div className="text-slate-950 ml-2 font-normal">
+                    mg per mL
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex mt-6 mb-6">
+              <h2 className="font-semibold text-lg mr-2">The result is:</h2>
+              <h2 className="input input-bordered w-full max-w-xs text-lg rounded-md px-3 pt-2 text-slate-950">
+                {Number(patientProfile.pweight) > 0 &&
+                Number(patientProfile.pmaxdosage) > 0 &&
+                Number(patientProfile.pconcentration) > 0 &&
+                !isNaN(Number(patientProfile.pweight)) &&
+                !isNaN(Number(patientProfile.pmaxdosage)) &&
+                !isNaN(Number(patientProfile.pconcentration)) ? (
+                  <>
+                    {" "}
+                    {(
+                      ((Number(patientProfile.pweight) / 2.2) *
+                        Number(patientProfile.pmaxdosage)) /
+                      Number(patientProfile.pconcentration)
+                    ).toFixed(2)}{" "}
+                    mL
+                  </>
+                ) : (
+                  <span className="">
+                    <br />
+                  </span>
+                )}
+              </h2>
+            </div>
+          </>
+        )}
+
         <div className="flex">
-          <ClearAllButton />
-          <span className="">
+          <span className="mr-3">
+            <HowToCDC />
+          </span>
+          <span className="mr-3">
+            <ClearAllButton />
+          </span>
+          <span className="mr-3">
             <FeedbackReport />
-          </span>{" "}
-        </div>
-      </div>
-      <div className="">
-        <h1 className="font-semibold text-2xl ml-6 mt-4">Formula: </h1>
-        <div className="flex items-center ml-8">
-          {" "}
-          <span className="mr-1 text-xl">
-            {Number(weight) > 0 &&
-            Number(dosage) > 0 &&
-            Number(concentration) > 0 &&
-            !isNaN(Number(weight)) &&
-            !isNaN(Number(dosage)) &&
-            !isNaN(Number(concentration)) ? (
-              <>
-                The result is:{" "}
-                <span className="font-bold stacked-fractions">
-                  (
-                  <span className="inline-block border-solid border-b-2 border-black pb-1">
-                    {Number(weight)}
-                  </span>{" "}
-                  / 1 ) * ( 1 /
-                  <span className="inline-block border-solid border-b-2 border-black pb-1">
-                    2.2
-                  </span>
-                  ) * (
-                  <span className="inline-block border-solid border-b-2 border-black pb-1">
-                    {Number(dosage)}
-                  </span>{" "}
-                  / 1 ) * ( 1 /
-                  <span className="inline-block border-solid border-b-2 border-black pb-1">
-                    {Number(concentration)}
-                  </span>
-                  )
-                </span>
-                {"= "}
-                {(
-                  ((Number(weight) / 2.2) * Number(dosage)) /
-                  Number(concentration)
-                ).toFixed(2)}{" "}
-                mL
-              </>
-            ) : (
-              <NanError />
-            )}
           </span>
         </div>
       </div>
+      {showConcentrationComponent && (
+        <>
+          <div className="">
+            <h1 className="font-semibold text-2xl ml-6 mt-4">Formula: </h1>
+            <div className="flex items-center ml-8">
+              {" "}
+              <span className="mr-1 text-xl">
+                {Number(patientProfile.pweight) > 0 &&
+                Number(patientProfile.pmaxdosage) > 0 &&
+                Number(patientProfile.pconcentration) > 0 &&
+                !isNaN(Number(patientProfile.pweight)) &&
+                !isNaN(Number(patientProfile.pmaxdosage)) &&
+                !isNaN(Number(patientProfile.pconcentration)) ? (
+                  <>
+                    The result is:{" "}
+                    <span className="font-bold stacked-fractions">
+                      (
+                      <span className="inline-block border-solid border-b-2 border-black pb-1">
+                        {Number(patientProfile.pweight)}
+                      </span>{" "}
+                      / 1 ) * ( 1 /
+                      <span className="inline-block border-solid border-b-2 border-black pb-1">
+                        2.2
+                      </span>
+                      ) * (
+                      <span className="inline-block border-solid border-b-2 border-black pb-1">
+                        {Number(patientProfile.pmaxdosage)}
+                      </span>{" "}
+                      / 1 ) * ( 1 /
+                      <span className="inline-block border-solid border-b-2 border-black pb-1">
+                        {Number(patientProfile.pconcentration)}
+                      </span>
+                      )
+                    </span>
+                    {"= "}
+                    {(
+                      ((Number(patientProfile.pweight) / 2.2) *
+                        Number(patientProfile.pmaxdosage)) /
+                      Number(patientProfile.pconcentration)
+                    ).toFixed(2)}{" "}
+                    mL
+                  </>
+                ) : (
+                  <NanError />
+                )}
+              </span>
+            </div>
+          </div>
+        </>
+      )}
       <div className="mt-5">
         <Footer />
       </div>

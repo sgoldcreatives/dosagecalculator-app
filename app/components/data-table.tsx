@@ -93,7 +93,7 @@ export function DataTable<TData, TValue>({
       .map((row: any) => {
         const name = row.getValue("name");
         const dosage = row.getValue("dosage");
-        const calculated = (dosage * patient.pweight).toFixed(1); // Round to 1 decimal point
+        const calculated = (dosage * Number(patient.pweight)).toFixed(1); // Round to 1 decimal point
         return `${name} (${row.getValue(
           "concentration"
         )}): ${calculated} cc - (${row.getValue("dosageForm")})`;
@@ -120,7 +120,7 @@ export function DataTable<TData, TValue>({
   function handlePrintToPDF() {
     if (
       table.getFilteredSelectedRowModel().rows.length !== 0 &&
-      !isNaN(patient.pweight) &&
+      !isNaN(Number(patient.pweight)) &&
       patient.pname !== ""
     ) {
       return generatePDF();
@@ -148,7 +148,7 @@ export function DataTable<TData, TValue>({
         <div>Error generating PDF document</div>
         <div className="text-slate-400 italic">
           {patient.pname === "" && <div>Patient name is empty</div>}
-          {patient.pweight === 0 && <div>Patient weight is zero</div>}
+          {Number(patient.pweight) === 0 && <div>Patient weight is zero</div>}
           {table.getFilteredSelectedRowModel().rows.length === 0 && (
             <div>No rows are selected</div>
           )}

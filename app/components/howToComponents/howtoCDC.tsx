@@ -24,7 +24,7 @@ export function HowToCDC() {
           <TooltipTrigger>
             <AlertDialog>
               <AlertDialogTrigger
-                className="flex items-center  mt-2 border-2 border-green-500 rounded-md px-4 py-2 bg-white text-green-700
+                className="flex items-center border-2 border-green-500 rounded-md px-4 py-1.5 bg-white text-green-700
                hover:bg-green-700 shadow-md hover:text-white transition duration-300 ease-in-out"
               >
                 <svg

@@ -26,7 +26,8 @@ import { ClearAllButton } from "./components/clearall-button";
 import { FeedbackReport } from "./components/feedbackreport";
 import { Checkbox } from "@/components/ui/checkbox";
 import { WeightContext } from "./context";
-import { HowToDC } from "./components/howtoDC";
+import { HowToDC } from "./components/howToComponents/howtoDC";
+import { ToCustom } from "./toCustom";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
@@ -34,12 +35,12 @@ function lbsToKg(Pweight: number) {
 type User = (typeof medications)[0];
 export interface PatientProfile {
   pname: string;
-  pweight: number;
+  pweight: string;
 }
 export function VetDose() {
   const [patientProfile, setPatientProfile] = useState<PatientProfile>({
     pname: "",
-    pweight: 0,
+    pweight: "",
   });
 
   const updatePatientProfile = (patient: Partial<PatientProfile>) => {
@@ -54,10 +55,13 @@ export function VetDose() {
     updatePatientProfile({ pname: event.target.value });
   };
 
-  // Handler for the age change
-  const handleWeightChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const pweight = parseInt(event.target.value, 10);
-    updatePatientProfile({ pweight: isNaN(pweight) ? 0 : pweight });
+  // Handler for the weight change
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const weight = e.target.value;
+    setPatientProfile({
+      ...patientProfile,
+      pweight: weight,
+    });
   };
 
   const data = medications;
@@ -94,7 +98,7 @@ export function VetDose() {
       cell: ({ row }) => {
         const medications = row.original;
         const dosage = parseFloat(row.getValue("dosage"));
-        const calculated = dosage * patientProfile.pweight;
+        const calculated = dosage * Number(patientProfile.pweight);
         return (
           <Dialog>
             <DialogTrigger>
@@ -182,7 +186,7 @@ export function VetDose() {
       header: "Dosage",
       cell: ({ row }) => {
         const dosage = parseFloat(row.getValue("dosage"));
-        const calculated = dosage * patientProfile.pweight;
+        const calculated = dosage * Number(patientProfile.pweight);
 
         return (
           <div className="text-left font-medium">
@@ -211,6 +215,9 @@ export function VetDose() {
         <div className="">
           <Title />
         </div>
+        <div>
+          <ToCustom/>
+        </div>
         <div className="">
           <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-4 pb-3 px-3 max-w-screen-md text-slate-950">
             <div className="items-center">
@@ -237,9 +244,6 @@ export function VetDose() {
                 <div className="flex items-center">
                   <input
                     className="input pb-2 input-bordered w-full max-w-xs font-normal text-end text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
-                    value={
-                      patientProfile.pweight !== 0 ? patientProfile.pweight : ""
-                    }
                     placeholder="Enter weight..."
                     onChange={handleWeightChange}
                   />
@@ -249,8 +253,8 @@ export function VetDose() {
             </div>
             <div className=" mt-4 flex text-xl">
               <p className="input input-bordered w-full max-w-xs text-xl text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-dashed border-2 text-slate-950">
-                {patientProfile.pweight > 0 ? (
-                  lbsToKg(patientProfile.pweight).toFixed(1)
+                {Number(patientProfile.pweight) > 0 ? (
+                  lbsToKg(Number(patientProfile.pweight)).toFixed(1)
                 ) : (
                   <NanError />
                 )}
