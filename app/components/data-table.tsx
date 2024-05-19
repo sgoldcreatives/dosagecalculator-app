@@ -10,16 +10,6 @@ import {
 } from "@/components/ui/table";
 import jsPDF from "jspdf";
 import "react-toastify/dist/ReactToastify.css";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { MoreHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
@@ -47,9 +37,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { dosageForm, tags } from "./combobox-data";
-import { DialogBox } from "./dialogbox";
-import { useContext } from "react";
+import { dosageForm } from "./combobox-data";
 import { usePatientContext } from "../context";
 import { toast } from "sonner";
 
