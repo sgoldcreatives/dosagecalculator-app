@@ -12,7 +12,8 @@ export type drugType =
   | "NSAID"
   | "Sedation"
   | "Antibiotic"
-  | "Opioid"
+    | "Opioid"
+    | "Pain Analgesic"
   | "Steroid";
 
 export const drugs: PlumbsDrugTable[] = [
@@ -24,12 +25,20 @@ export const drugs: PlumbsDrugTable[] = [
     doseCat:
       "For susceptible skin and soft tissue infections: 5 mg/kg PO q12h or 10 mg/kg PO once daily",
     drugType: "Antibiotic",
-    },
-    {
-        id: 2,
-        name: "Carprofen",
-        doseDog: "4.4 mg/kg PO; may be given once daily or divided and given as 2.2. mg/kg twice daily; round dose to nearest half caplet increment. ",
-        doseCat: "NOT RECOMMENDED",
-        drugType: "NSAID"
-    }
+  },
+  {
+    id: 2,
+    name: "Carprofen",
+    doseDog:
+      "4.4 mg/kg PO; may be given once daily or divided and given as 2.2. mg/kg twice daily; round dose to nearest half caplet increment. ",
+    doseCat: "NOT RECOMMENDED",
+    drugType: "NSAID",
+  },
+  {
+    id: 3,
+    name: "Gabapentin",
+    doseDog: "1.25 to 10 mg/kg PO q24h (once daily)",
+    doseCat: "1.25 to 10 mg/kg PO q24h (once daily)",
+    drugType: "Pain Analgesic",
+  },
 ];

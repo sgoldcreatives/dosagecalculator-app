@@ -23,4 +23,8 @@ export const drugType = [
     value: "steroid",
     label: "Steroid",
   },
+  {
+    value: "pain analgesic",
+    label: "Pain Analgesic"
+  }
 ];
