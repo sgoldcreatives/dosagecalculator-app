@@ -7,7 +7,7 @@ export function FeedbackReport() {
     <div>
       <Button
         asChild
-        className="flex border-2 border-blue-500 rounded-md px-4 py-2 bg-white text-blue-700
+        className="flex border-2 border-blue-300 rounded-md px-4 py-2 bg-white text-blue-700
                hover:bg-blue-700 shadow-md hover:text-white transition duration-300 ease-in-out"
       >
         <Link
