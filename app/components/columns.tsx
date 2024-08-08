@@ -7,7 +7,6 @@ export interface Med {
   dosageForm: medForm;
   bio: string;
 }
-("use client");
 
 export type medForm = "🍯" | "💉";
 export type medTags =
