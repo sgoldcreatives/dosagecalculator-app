@@ -24,7 +24,6 @@ export function ToCustom() {
         </svg>
         <span className="ml-2"> Create Custom Dosage</span>
       </Link>
-      <AlertNewFeature/>
     </div>
   );
 }

@@ -93,7 +93,7 @@ export default function Page() {
 
   const [activeComponent, setActiveComponent] = useState<
     "database" | "pdf" | null
-  >(null);
+  >("pdf");
 
   const handleDatabaseSwitchChange = () => {
     setActiveComponent((prevState) =>
@@ -200,8 +200,8 @@ export default function Page() {
               </svg>
               <span className="ml-2">
                 {activeComponent === "pdf"
-                  ? "Hide PDF Component"
-                  : "Show PDF Component"}
+                  ? "Hide Plumb's Veterinary Medicine Handbook"
+                  : "Show Plumb's Veterinary Medicine Handbook"}
               </span>
             </Button>
             <Button

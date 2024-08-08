@@ -215,33 +215,13 @@ export function DataTable<TData, TValue>({
     <div className="text-slate-950 ml-2">
       <div>
         <div className="flex items-center py-4">
-          <Button
-            onClick={handlePrintToPDF}
-            className="mr-8 flex items-center border-2 border-gray-500 rounded-md px-4 py-2 bg-gray-100 text-gray-800 hover:bg-gray-800 shadow-md hover:text-white transition duration-300 ease-in-out"
-          >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3.5 2C3.22386 2 3 2.22386 3 2.5V12.5C3 12.7761 3.22386 13 3.5 13H11.5C11.7761 13 12 12.7761 12 12.5V6H8.5C8.22386 6 8 5.77614 8 5.5V2H3.5ZM9 2.70711L11.2929 5H9V2.70711ZM2 2.5C2 1.67157 2.67157 1 3.5 1H8.5C8.63261 1 8.75979 1.05268 8.85355 1.14645L12.8536 5.14645C12.9473 5.24021 13 5.36739 13 5.5V12.5C13 13.3284 12.3284 14 11.5 14H3.5C2.67157 14 2 13.3284 2 12.5V2.5Z"
-                fill="currentColor"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            <span className="ml-2">Print to PDF</span>
-          </Button>
           <Input
             placeholder="Search by name..."
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("name")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm bg-violet-100 border-2 border-violet-300"
+            className="max-w-md text-2xl bg-violet-100 border-2 border-violet-300"
           />
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -249,7 +229,7 @@ export function DataTable<TData, TValue>({
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className="w-[200px] justify-between bg-violet-100 border-2 border-violet-300 ml-auto mr-52 right-0"
+                className="min-w-md text-2xl text-slate-400 justify-between bg-violet-100 border-2 border-violet-300 ml-auto mr-50 right-0"
               >
                 {value
                   ? dosageForm.find((dosageForm) => dosageForm.value === value)
@@ -296,7 +276,7 @@ export function DataTable<TData, TValue>({
           </Popover>
         </div>
       </div>
-      <Table className="border-4 border-dashed rounded-md bg-violet-100  border-slate-300">
+      <Table className="border-4 border-dashed text-xl rounded-md bg-violet-100  border-slate-300">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

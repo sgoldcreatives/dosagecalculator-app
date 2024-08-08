@@ -9,6 +9,11 @@ import {
 import { DataTable } from "./components/data-table";
 import { NanError } from "./components/nanError";
 import { Footer } from "./components/footer";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { DisclaimerBox } from "./components/disclaimerbox";
 import {
   Dialog,
@@ -21,7 +26,6 @@ import {
 import { Title } from "./title";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import { AlertNewFeature } from "./components/newfeature-alert";
 import { ClearAllButton } from "./components/clearall-button";
 import { FeedbackReport } from "./components/feedbackreport";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -66,80 +70,81 @@ export function VetDose() {
 
   const data = medications;
   const columns: ColumnDef<Med>[] = [
+    // {
+    //   id: "select",
+    //   header: ({ table }) => (
+    //     <span>
+    //       <Checkbox
+    //         checked={
+    //           table.getIsAllPageRowsSelected() ||
+    //           (table.getIsSomePageRowsSelected() && "indeterminate")
+    //         }
+    //         onCheckedChange={(value) =>
+    //           table.toggleAllPageRowsSelected(!!value)
+    //         }
+    //         aria-label="Select all"
+    //       />
+    //       <span className="ml-2">Select All</span>
+    //     </span>
+    //   ),
+    //   cell: ({ row }) => (
+    //     <Checkbox
+    //       checked={row.getIsSelected()}
+    //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+    //       aria-label="Select row"
+    //     />
+    //   ),
+    //   enableSorting: false,
+    //   enableHiding: false,
+    // },
+    // {
+    //   id: "Instructions",
+    //   cell: ({ row }) => {
+    //     const medications = row.original;
+    //     const dosage = parseFloat(row.getValue("dosage"));
+    //     const calculated = dosage * Number(patientProfile.pweight);
+    //     return (
+    //       <Dialog>
+    //         <DialogTrigger>
+    //           <Button
+    //             variant="outline"
+    //             size="icon"
+    //             className="bg-violet-100 border-2 border-slate-300 "
+    //           >
+    //             <MagnifyingGlassIcon className="h-4 w-4 " />
+    //           </Button>
+    //         </DialogTrigger>
+    //         <DialogContent>
+    //           <DialogHeader>
+    //             <DialogTitle className="italic text-slate-400 text-base">
+    //               {!isNaN(calculated) && calculated > 0
+    //                 ? ""
+    //                 : "Slight error, you have not entered a number!"}
+    //             </DialogTitle>
+    //             <DialogDescription className="text-lg font-medium text-slate-950">
+    //               {!isNaN(calculated) && calculated > 0
+    //                 ? "For " +
+    //                   medications.name +
+    //                   " give " +
+    //                   calculated.toFixed(2) +
+    //                   "cc " +
+    //                   (medications.dosageForm === "🍯"
+    //                     ? "by mouth."
+    //                     : "by injection.")
+    //                 : "Generally for " +
+    //                   medications.name +
+    //                   " you should multiply the patient's weight (in lbs) by " +
+    //                   medications.dosage.toFixed(3) +
+    //                   "."}
+    //             </DialogDescription>
+    //           </DialogHeader>
+    //         </DialogContent>
+    //       </Dialog>
+    //     );
+    //   },
+    // },
     {
-      id: "select",
-      header: ({ table }) => (
-        <span>
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && "indeterminate")
-            }
-            onCheckedChange={(value) =>
-              table.toggleAllPageRowsSelected(!!value)
-            }
-            aria-label="Select all"
-          />
-          <span className="ml-2">Select All</span>
-        </span>
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
-    {
-      id: "Instructions",
-      cell: ({ row }) => {
-        const medications = row.original;
-        const dosage = parseFloat(row.getValue("dosage"));
-        const calculated = dosage * Number(patientProfile.pweight);
-        return (
-          <Dialog>
-            <DialogTrigger>
-              <Button
-                variant="outline"
-                size="icon"
-                className="bg-violet-100 border-2 border-slate-300 "
-              >
-                <MagnifyingGlassIcon className="h-4 w-4 " />
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle className="italic text-slate-400 text-base">
-                  {!isNaN(calculated) && calculated > 0
-                    ? ""
-                    : "Slight error, you have not entered a number!"}
-                </DialogTitle>
-                <DialogDescription className="text-lg font-medium text-slate-950">
-                  {!isNaN(calculated) && calculated > 0
-                    ? "For " +
-                      medications.name +
-                      " give " +
-                      calculated.toFixed(2) +
-                      "cc " +
-                      (medications.dosageForm === "Oral"
-                        ? "by mouth."
-                        : "by injection.")
-                    : "Generally for " +
-                      medications.name +
-                      " you should multiply the patient's weight (in lbs) by " +
-                      medications.dosage.toFixed(3) +
-                      "."}
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
-        );
-      },
-    },
-    {
+      header: "Information",
       id: "Bio",
       cell: ({ row }) => {
         const medications = row.original;
@@ -199,13 +204,32 @@ export function VetDose() {
         );
       },
     },
-    {
-      accessorKey: "tags",
-      header: "Tags",
-    },
+    // {
+    //   accessorKey: "tags",
+    //   header: "Tags",
+    // },
     {
       accessorKey: "dosageForm",
       header: "Dosage Form",
+      cell: ({ row }) => {
+        const medications = row.original;
+        const dosageForm = row.getValue("dosageForm");
+
+        return (
+          <div>
+            <HoverCard>
+              <HoverCardTrigger className="text-3xl">
+                {medications.dosageForm}
+              </HoverCardTrigger>
+              <HoverCardContent className='text-sm bg-violet-100 border-4 border-slate-300'>
+                {medications.dosageForm != "🍯"
+                  ? "Injectable"
+                  : "Oral Medication"}
+              </HoverCardContent>
+            </HoverCard>
+          </div>
+        );
+      },
     },
   ];
 
@@ -216,51 +240,38 @@ export function VetDose() {
           <Title />
         </div>
         <div>
-          <ToCustom/>
+          <ToCustom />
         </div>
         <div className="">
           <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-4 pb-3 px-3 max-w-screen-md text-slate-950">
-            <div className="items-center">
-              <div className="mt-3 rounded-md bg-violet-100 max-w-xs w-auto border-violet-100 border-2 border-b-violet-500">
-                <p className="ml-6 opacity-60 font-normal text-sm">
-                  Patient&apos;s name
-                </p>
-                <div className="flex items-center">
-                  <input
-                    className="input pb-2 input-bordered w-full font-normal text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
-                    value={patientProfile.pname}
-                    placeholder="Enter name..."
-                    onChange={handleNameChange}
-                  />
-                  <div className="text-slate-950 ml-2 font-normal"></div>
-                </div>
-              </div>
-            </div>
+            <div className="items-center"></div>
             <div className="flex items-center font-semibold">
-              <div className="mt-3 rounded-md bg-violet-100 border-violet-100 border-2 border-b-violet-500">
-                <p className="ml-6 opacity-60 font-normal text-sm">
+              <div className="mt-3 text-lg rounded-md bg-violet-100 border-violet-100 border-2 border-b-violet-500">
+                <p className="ml-6 text-lg opacity-60 font-normal">
                   Patient&apos;s weight
                 </p>
                 <div className="flex items-center">
                   <input
-                    className="input pb-2 input-bordered w-full max-w-xs font-normal text-end text-lg bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none"
+                    className="input pb-2 input-bordered w-full max-w-sm font-normal text-end text-5xl bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none placeholder:text-slate-400"
                     placeholder="Enter weight..."
                     onChange={handleWeightChange}
                   />
-                  <div className="text-slate-950 ml-2 font-normal">lbs</div>
+                  <div className="text-slate-950 ml-2 text-5xl font-normal">
+                    lbs
+                  </div>
                 </div>
               </div>
             </div>
-            <div className=" mt-4 flex text-xl">
-              <p className="input input-bordered w-full max-w-xs text-xl text-end  bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-dashed border-2 text-slate-950">
-                {Number(patientProfile.pweight) > 0 ? (
-                  lbsToKg(Number(patientProfile.pweight)).toFixed(1)
-                ) : (
-                  <NanError />
-                )}
-              </p>
-              <span className="text-slate-950 ml-2 mt-2.5">kgs</span>
-            </div>
+            {Number(patientProfile.pweight) > 0 ? (
+              <div className="mt-4 flex text-3xl">
+                <p className="input input-bordered w-full max-w-sm text-3xl text-end bg-violet-100 rounded-md px-3 pt-2 border-violet-300 border-dashed border-2 text-slate-950">
+                  {lbsToKg(Number(patientProfile.pweight)).toFixed(1)}
+                </p>
+                <span className="text-slate-950 ml-2 mt-2.5">kgs</span>
+              </div>
+            ) : (
+              <p></p>
+            )}
             <div className="flex mt-4">
               <span className="mr-3">
                 <HowToDC />
