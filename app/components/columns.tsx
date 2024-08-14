@@ -262,4 +262,22 @@ export const medications: Med[] = [
     dosageForm: "🍯",
     bio: "Gabapentin is an oral medication used in veterinary medicine to manage neuropathic pain and seizures in cats. It’s particularly effective for chronic pain conditions such as osteoarthritis and intervertebral disc disease.",
   },
+  {
+    id: 28,
+    dosage: 0.06,
+    name: "Gabapentin (K9)",
+    concentration: "75 mg/mL",
+    tags: ["For Cats", "Tx"],
+    dosageForm: "🍯",
+    bio: "Gabapentin is an oral medication used in veterinary medicine to manage neuropathic pain and seizures in cats. It’s particularly effective for chronic pain conditions such as osteoarthritis and intervertebral disc disease.",
+  },
+  {
+    id: 29,
+    dosage: 0.09,
+    name: "Gabapentin (K9)",
+    concentration: "75 mg/mL",
+    tags: ["For Cats", "Tx"],
+    dosageForm: "🍯",
+    bio: "Gabapentin is an oral medication used in veterinary medicine to manage neuropathic pain and seizures in cats. It’s particularly effective for chronic pain conditions such as osteoarthritis and intervertebral disc disease.",
+  },
 ];
