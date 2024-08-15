@@ -289,4 +289,13 @@ export const medications: Med[] = [
     dosageForm: "🍯",
     bio: "",
   },
+  {
+    id: 31,
+    dosage: .00907,
+    name: "Triamcinolone/Kenalog",
+    concentration: "10 mg/mL",
+    tags: ["Steroid"],
+    dosageForm: "💉",
+    bio: "",
+  }
 ];
