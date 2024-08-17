@@ -1,8 +1,43 @@
-
+import React, { useState, useEffect } from "react";
 
 export function AlertNewFeature() {
+  const [rotation, setRotation] = useState(0); // Track the rotation in degrees
+  const [direction, setDirection] = useState(1); // 1 for clockwise, -1 for counter-clockwise
+  const [isRotating, setIsRotating] = useState(true); // Track if the component is rotating
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (isRotating) {
+      interval = setInterval(() => {
+        setRotation((prev) => {
+          const newRotation = prev + 5 * direction;
+
+          if (newRotation >= 5) {
+            setDirection(-1); // Change direction to counter-clockwise
+          } else if (newRotation <= -5) {
+            setDirection(1); // Change direction to clockwise
+          }
+
+          return newRotation;
+        });
+      }, 150); // Update every 50ms for a noticeable movement
+    }
+
+    return () => {
+      clearInterval(interval); // Clean up the interval on component unmount
+    };
+  }, [isRotating, direction]);
+
+  const handleOkayClick = () => {
+    setIsRotating(false); // Stop the rotation when "Okay" is pressed
+  };
+
   return (
-    <div className="bg-slate-200 border-2 ml-4 mt-2 shadow-md rounded-md border-slate-500 text-xs inline-block align-middle p-2">
+    <div
+      style={{ transform: `rotate(${rotation}deg)` }}
+      className="bg-slate-200 border-2 ml-4 mt-2 shadow-md rounded-md border-slate-500 text-xs inline-block align-middle p-2"
+    >
       <h3 className="font-bold italic flex">
         <svg
           width="15"
@@ -22,7 +57,13 @@ export function AlertNewFeature() {
         Heads up!
       </h3>
       <p>Check out the new pill dosage calculator!</p>
-      
+      <button
+        onClick={handleOkayClick}
+        className="flex items-center border-2 border-slate-500 rounded-md px-2 py-1 mt-2 bg-slate-50
+               hover:bg-slate-500 hover:text-white transition shadow-md duration-300 ease-in-out"
+      >
+        Okay
+      </button>
     </div>
   );
 }
