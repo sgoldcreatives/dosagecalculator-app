@@ -83,79 +83,50 @@ export function VetDose() {
   const datapill = pills;
   const columnspill: ColumnDef<Pill>[] = [
     {
-      header: "Information",
-      id: "Bio",
-      cell: ({ row }) => {
-        const medications = row.original;
-        const bio = row.getValue("bio");
-        return (
-          <Dialog>
-            <DialogTrigger>
-              <Button
-                variant="outline"
-                size="icon"
-                className="bg-violet-100 border-2 border-slate-300 "
-              >
-                <QuestionMarkCircledIcon className="h-4 w-4 " />
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle className=" text-slate-950 font-bold">
-                  <h2> Info </h2>
-                </DialogTitle>
-                <DialogDescription className="text-lg text-slate-900 font-normal">
-                  {medications.bio}
-                  <p className="italic text-sm text-slate-500">
-                    For any suggestions, bug reports, or errors found, feel free
-                    to contact Saar!
-                  </p>
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
-        );
-      },
-    },
-    {
       accessorKey: "name",
       header: "Name",
     },
     {
-      accessorKey: "mindosage",
-      header: "Minimum Dosage",
+      header: "Dosage Range",
+      id: "dosage-range",
       cell: ({ row }) => {
-        const mindosage = parseFloat(row.getValue("mindosage"));
-        const calculatedmin =
-          mindosage * (Number(patientProfile.pweight) / 2.205);
+        const medications = row.original;
+        const mindosage = medications.mindosage;
+        const maxdosage = medications.maxdosage;
+        const patientWeight = Number(patientProfile.pweight);
+
+        const calculatedmin = mindosage * (patientWeight / 2.205);
+        const calculatedmax = maxdosage * (patientWeight / 2.205);
 
         return (
           <div className="text-left font-medium">
-            {!isNaN(calculatedmin) && calculatedmin > 0 ? (
-              calculatedmin.toFixed(1) + " mg"
-            ) : (
+            {patientWeight <= 0 || isNaN(patientWeight) ? (
               <NanError />
-            )} <span className="text-sm text-slate-500">({mindosage} mg/kg)</span>
+            ) : (
+              <>
+                {mindosage === 0
+                  ? "No min dosage"
+                  : `${calculatedmin.toFixed(1)} mg`}
+                {" - "}
+                {!isNaN(calculatedmax) && calculatedmax > 0
+                  ? `${calculatedmax.toFixed(1)} mg`
+                  : "No max dosage"}
+              </>
+            )}
+            <div className="text-sm text-slate-500">
+              ({mindosage} - {maxdosage} mg/kg)
+            </div>
           </div>
         );
       },
     },
     {
-      accessorKey: "maxdosage",
-      header: "Maximum Dosage",
+      header: "Instructions",
+      id: "instructions",
       cell: ({ row }) => {
-        const maxdosage = parseFloat(row.getValue("maxdosage"));
-        const calculatedmax = maxdosage * (Number(patientProfile.pweight) / 2.205);
-
-        return (
-          <div className="text-left font-medium">
-            {!isNaN(calculatedmax) && calculatedmax > 0 ? (
-              calculatedmax.toFixed(1) + " mg"
-            ) : (
-              <NanError />
-            )} <span className="text-sm text-slate-500">({maxdosage} mg/kg)</span>
-          </div>
-        );
+        const medications = row.original;
+        const bio = row.getValue("bio");
+        return <div className='text-sm max-w-sm'>{medications.instructions}</div>;
       },
     },
     {

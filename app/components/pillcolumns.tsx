@@ -5,7 +5,7 @@ export interface Pill {
   name: string;
   tags: medTags[];
   dosageForm: medForm;
-  bio: string;
+  instructions: string;
 }
 
 export type medForm = "💊";
@@ -26,15 +26,42 @@ export const pills: Pill[] = [
     name: "Acepromazine",
     tags: ["For Dogs"],
     dosageForm: "💊",
-    bio: "Acepromazine is a tranquilizer used in veterinary medicine to sedate dogs and manage anxiety. Administer every 12-24 hours, with a lower dosage range recommended for Great Dane breeds due to their sensitivity.",
+    instructions: "Given eveyr 12-24 hours as needed for assistance with post operative care or sedation. Dose with caution in Great Dane breeds.",
   },
   {
     id: 2,
     mindosage: 5,
-    maxdosage: 20,
+    maxdosage: 10,
     name: "Enrofloxacin (Baytril)",
     tags: ["For Dogs", "Antibiotic"],
     dosageForm: "💊",
-    bio: "Enrofloxacin is a broad-spectrum antibiotic used in veterinary medicine to treat bacterial infections in dogs and cats. Administered once daily, with dosage adjustments needed for renal-impaired patients and caution advised for use in young, growing animals.",
+    instructions: "Given every 12 hours (BID) for no more than 10-14 days.",
+  },
+  {
+    id: 3,
+    mindosage: 0,
+    maxdosage: 2.2,
+    name: "Carprofen",
+    tags: ["For Dogs", "Pain"],
+    dosageForm: "💊",
+    instructions: "Given every 12 hours (BID) usually for no more than 14 days as it has an impact on Kidney levels",
+  },
+  {
+    id: 4,
+    mindosage: 1.25,
+    maxdosage: 10,
+    name: "Gabapentin",
+    tags: ["For Dogs", "For Cats", "Pain"],
+    dosageForm: "💊",
+    instructions: "Given once daily",
+  },
+  {
+    id: 5,
+    mindosage: 0.4,
+    maxdosage: 0.6,
+    name: "Apoquel",
+    tags: ["For Dogs"],
+    dosageForm: "💊",
+    instructions: "Twice daily (BID) for up to 14 days. Continue therapy once daily (SID) thereafter for maintenance",
   },
 ];
