@@ -45,7 +45,7 @@ export function AlertNewFeature() {
           ? "transform 0.5s ease-in-out"
           : "transform 0.15s ease-in-out", // Smooth slide effect
       }}
-      className="bg-slate-200 border-2 ml-4 mt-2 shadow-md rounded-md border-slate-500 text-xs inline-block align-middle p-2"
+      className="bg-slate-200 border-2 ml-4 mt-14 shadow-md rounded-md border-slate-500 text-xs inline-block align-middle p-2"
     >
       <h3 className="font-bold italic flex">
         <svg
