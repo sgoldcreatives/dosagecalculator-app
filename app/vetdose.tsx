@@ -35,26 +35,33 @@ function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
 }
 type User = (typeof medications)[0];
+
 export interface PatientProfile {
   pname: string;
   pweight: string;
+  pmg: string;
 }
+
 export function VetDose() {
   const [patientProfile, setPatientProfile] = useState<PatientProfile>({
     pname: "",
     pweight: "",
+    pmg: "",
   });
+
+  const handleMGChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const mg = e.target.value;
+    setPatientProfile({
+      ...patientProfile,
+      pmg: mg,
+    });
+  };
 
   const updatePatientProfile = (patient: Partial<PatientProfile>) => {
     setPatientProfile((prevPatientProfile) => ({
       ...prevPatientProfile,
       ...patient,
     }));
-  };
-
-  // Handler for the name change
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updatePatientProfile({ pname: event.target.value });
   };
 
   // Handler for the weight change
@@ -126,9 +133,45 @@ export function VetDose() {
       cell: ({ row }) => {
         const medications = row.original;
         const bio = row.getValue("bio");
-        return <div className='text-sm max-w-sm'>{medications.instructions}</div>;
+        return (
+          <div className="text-sm max-w-sm">{medications.instructions}</div>
+        );
       },
     },
+    {
+  header: "Stock Dosage",
+  id: "stock dosage",
+  cell: ({ row }) => {
+    const medications = row.original;
+    const mindosage = medications.mindosage;
+    const maxdosage = medications.maxdosage;
+    const patientWeight = Number(patientProfile.pweight);
+
+    const calculatedmin = mindosage * (patientWeight / 2.205);
+    const calculatedmax = maxdosage * (patientWeight / 2.205);
+    const pillMg = Number(patientProfile.pmg);
+
+    // Check if any of the values are NaN or zero
+    if (
+      isNaN(calculatedmin) ||
+      isNaN(calculatedmax) ||
+      isNaN(pillMg) ||
+      calculatedmin === 0 ||
+      calculatedmax === 0 ||
+      pillMg === 0
+    ) {
+      return null;
+    }
+
+    // If all values are valid, render the dosage information
+    return (
+      <div>
+        Give {(calculatedmin / pillMg).toFixed(1)} to{" "}
+        {(calculatedmax / pillMg).toFixed(1)} of a single {patientProfile.pmg} mg pill
+      </div>
+    );
+  },
+},
     {
       accessorKey: "dosageForm",
       header: "Dosage Form",
@@ -340,6 +383,23 @@ export function VetDose() {
         )}
         {selectedSwitch === "pill" && (
           <div className="m-2">
+            <div className="mt-3 text-base rounded-md bg-violet-100 border-violet-100 border-2 border-b-violet-500 w-full max-w-xs flex items-center justify-between p-2">
+              <div className="flex flex-col">
+                <p className="ml-4 text-sm opacity-60 font-normal">
+                  mg in stock
+                </p>
+                <div className="flex items-center mt-1">
+                  <input
+                    className="input pb-1 input-bordered w-full max-w-xs font-normal text-end text-xl bg-violet-100 rounded-md px-2 pt-1 text-slate-950 focus:outline-none focus:border-none placeholder:text-slate-400"
+                    placeholder="Enter mg..."
+                    onChange={handleMGChange}
+                  />
+                  <div className="text-slate-950 ml-1 text-xl font-normal">
+                    mg
+                  </div>
+                </div>
+              </div>
+            </div>
             <DataTable columns={columnspill} data={datapill} />
           </div>
         )}

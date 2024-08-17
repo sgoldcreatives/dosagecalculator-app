@@ -26,7 +26,7 @@ export const pills: Pill[] = [
     name: "Acepromazine",
     tags: ["For Dogs"],
     dosageForm: "💊",
-    instructions: "Given eveyr 12-24 hours as needed for assistance with post operative care or sedation. Dose with caution in Great Dane breeds.",
+    instructions: "Given every 12-24 hours as needed for assistance with post operative care or sedation. Dose with caution in Great Dane breeds.",
   },
   {
     id: 2,
