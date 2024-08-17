@@ -1,7 +1,4 @@
-import { Terminal } from "lucide-react";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { QuestionMarkCircledIcon, Pencil2Icon } from "@radix-ui/react-icons";
 
 export function AlertNewFeature() {
   return (
@@ -24,7 +21,7 @@ export function AlertNewFeature() {
         {"  "}
         Heads up!
       </h3>
-      <p>You can now create and calculate your own custom dosages!</p>
+      <p>Check out the new pill dosage calculator!</p>
       
     </div>
   );
