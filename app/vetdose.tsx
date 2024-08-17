@@ -112,16 +112,16 @@ export function VetDose() {
             ) : (
               <>
                 {mindosage === 0
-                  ? "No min dosage"
-                  : `${calculatedmin.toFixed(1)} mg`}
-                {" - "}
-                {!isNaN(calculatedmax) && calculatedmax > 0
                   ? `${calculatedmax.toFixed(1)} mg`
-                  : "No max dosage"}
+                  : `${calculatedmin.toFixed(1)} mg - ${calculatedmax.toFixed(
+                      1
+                    )} mg`}
               </>
             )}
             <div className="text-sm text-slate-500">
-              ({mindosage} - {maxdosage} mg/kg)
+              {mindosage === 0
+                ? `Max dosage: ${maxdosage} mg/kg`
+                : `(${mindosage} - ${maxdosage} mg/kg)`}
             </div>
           </div>
         );
@@ -139,39 +139,55 @@ export function VetDose() {
       },
     },
     {
-  header: "Stock Dosage",
-  id: "stock dosage",
-  cell: ({ row }) => {
-    const medications = row.original;
-    const mindosage = medications.mindosage;
-    const maxdosage = medications.maxdosage;
-    const patientWeight = Number(patientProfile.pweight);
+      header: "Stock Dosage",
+      id: "stock dosage",
+      cell: ({ row }) => {
+        const medications = row.original;
+        const mindosage = medications.mindosage;
+        const maxdosage = medications.maxdosage;
+        const patientWeight = Number(patientProfile.pweight);
 
-    const calculatedmin = mindosage * (patientWeight / 2.205);
-    const calculatedmax = maxdosage * (patientWeight / 2.205);
-    const pillMg = Number(patientProfile.pmg);
+        const calculatedmin = mindosage * (patientWeight / 2.205);
+        const calculatedmax = maxdosage * (patientWeight / 2.205);
+        const pillMg = Number(patientProfile.pmg);
 
-    // Check if any of the values are NaN or zero
-    if (
-      isNaN(calculatedmin) ||
-      isNaN(calculatedmax) ||
-      isNaN(pillMg) ||
-      calculatedmin === 0 ||
-      calculatedmax === 0 ||
-      pillMg === 0
-    ) {
-      return null;
-    }
+        // Check if any of the critical values are NaN or zero
+        if (
+          isNaN(calculatedmax) ||
+          isNaN(pillMg) ||
+          calculatedmax === 0 ||
+          pillMg === 0
+        ) {
+          return null;
+        }
 
-    // If all values are valid, render the dosage information
-    return (
-      <div>
-        Give {(calculatedmin / pillMg).toFixed(1)} to{" "}
-        {(calculatedmax / pillMg).toFixed(1)} of a single {patientProfile.pmg} mg pill
-      </div>
-    );
-  },
-},
+        // Function to round to the nearest half
+        const roundToNearestHalf = (num: number): number => {
+          return Math.round(num * 2) / 2;
+        };
+
+        const roundedMin =
+          calculatedmin > 0 ? roundToNearestHalf(calculatedmin / pillMg) : null;
+        const roundedMax = roundToNearestHalf(calculatedmax / pillMg);
+
+        // Conditionally render the dosage information
+        return (
+          <div>
+            {roundedMin !== null && (
+              <span>
+                Give {roundedMin} to {roundedMax} of a single{" "}
+                {patientProfile.pmg} mg pill
+              </span>
+            )}
+            {roundedMin === null && (
+              <span>
+                Give up to {roundedMax} of a single {patientProfile.pmg} mg pill
+              </span>
+            )}
+          </div>
+        );
+      },
+    },
     {
       accessorKey: "dosageForm",
       header: "Dosage Form",
