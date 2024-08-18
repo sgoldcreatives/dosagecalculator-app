@@ -233,21 +233,20 @@ export function VetDose() {
             {roundedMin > 0 ? (
               <div>
                 <span>
-                  Give {formatDosage(roundedMin)} to {formatDosage(roundedMax)}{" "}
-                  of a pill.
+                  Give {formatDosage(roundedMin)} to {formatDosage(roundedMax)}.
                 </span>
                 <br />
                 <span className="text-sm text-slate-500">
                   Give {roundedMin} ({calculateMg(roundedMin)} mg) to {roundedMax}{" "}
-                  ({calculateMg(roundedMax)} mg)
+                  ({calculateMg(roundedMax)} mg).
                 </span>
               </div>
             ) : (
               <div>
-                <span>Give up to {formatDosage(roundedMax)} of a pill.</span>
+                <span>Give up to {formatDosage(roundedMax)}.</span>
                 <br />
                 <span className="text-sm text-slate-500">
-                  Give up to {roundedMax} ({calculateMg(roundedMax)} mg)
+                  Give up to {roundedMax} ({calculateMg(roundedMax)} mg).
                 </span>
               </div>
             )}
