@@ -6,7 +6,8 @@ export function ToCustom() {
     <div className="flex">
       <Link
         href="/additionalapps"
-        className="inline-flex items-center m-4 border-2 border-violet-300 rounded-md px-4 py-2 bg-white text-violet-700 hover:bg-violet-700 shadow-md hover:text-white transition duration-300 ease-in-out"
+        className="flex items-center border-2 border-violet-300 rounded-md px-4 py-2 bg-violet-50 text-violet-700
+               hover:bg-violet-700 hover:text-white shadow-md transition duration-300 ease-in-out whitespace-nowrap"
       >
         <svg
           width="15"

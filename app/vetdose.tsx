@@ -389,9 +389,6 @@ export function VetDose() {
         <div className="">
           <Title />
         </div>
-        <div>
-          <ToCustom />
-        </div>
         <div className="flex items-center">
           <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-4 pb-3 px-3 max-w-screen-md text-slate-950">
             <div className="items-center"></div>
@@ -459,6 +456,9 @@ export function VetDose() {
               <p></p>
             )}
             <div className="flex mt-4">
+              <span className="mr-3">
+                <ToCustom />
+              </span>
               <span className="mr-3">
                 <ClearAllButton />
               </span>
