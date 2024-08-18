@@ -17,6 +17,7 @@ export type medTags =
   | "Antibiotic"
   | "Steroid"
   | "Anti-Itch"
+  | "Antiemetic";
 
 export const pills: Pill[] = [
   {
@@ -46,7 +47,7 @@ export const pills: Pill[] = [
     drugClass: "NSAID",
     dosageForm: "💊",
     instructions:
-      "Given every 12 hours (BID) usually for no more than 14 days as it has an impact on Kidney levels, for this reason, it is better to underdose.",
+      "Given every 12 hours (BID) usually for no more than 14 days as it has an impact on kidney levels, for this reason, it is better to underdose.",
     dosesAvail: [25, 75, 100],
   },
   {
@@ -55,9 +56,18 @@ export const pills: Pill[] = [
     name: "Cefpodoxime",
     drugClass: "Antibiotic",
     dosageForm: "💊",
-    instructions:
-      "Given every 24 hours (SID) for no more than 7-10 days.",
+    instructions: "Given every 24 hours (SID) for no more than 7-10 days.",
     dosesAvail: [100, 200],
+  },
+  {
+    mindosage: 0,
+    maxdosage: 2,
+    name: "Cerenia",
+    drugClass: "Antiemetic",
+    dosageForm: "💊",
+    instructions:
+      "Given every 24 hours (SID) until resolution of acute vomiting.",
+    dosesAvail: [16, 64, 160],
   },
   {
     mindosage: 5,
