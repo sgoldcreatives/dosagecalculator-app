@@ -87,4 +87,13 @@ export const pills: Pill[] = [
     instructions: "Given once daily (SID).",
     dosesAvail: [50, 100, 300, 600],
   },
+  {
+    mindosage: 2,
+    maxdosage: 3,
+    name: "Tramadol",
+    drugClass: "Analgesic",
+    dosageForm: "💊",
+    instructions: "Given every 8 (TID) to 12 (BID) hours.",
+    dosesAvail: [50]
+  }
 ];
