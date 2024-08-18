@@ -172,88 +172,92 @@ export function VetDose() {
       },
     },
     {
-      header: "Dosage by Pill",
-      id: "stock dosage",
-      cell: ({ row }) => {
-        const medications = row.original;
-        const mindosage = medications.mindosage;
-        const maxdosage = medications.maxdosage;
-        const patientWeight = Number(patientProfile.pweight);
+  header: "Dosage by Pill",
+  id: "stock dosage",
+  cell: ({ row }) => {
+    const medications = row.original;
+    const mindosage = medications.mindosage;
+    const maxdosage = medications.maxdosage;
+    const patientWeight = Number(patientProfile.pweight);
 
-        const calculatedmin = mindosage * (patientWeight / 2.205);
-        const calculatedmax = maxdosage * (patientWeight / 2.205);
-        const pillMg = Number(patientProfile.pmg);
+    const calculatedmin = mindosage * (patientWeight / 2.205);
+    const calculatedmax = maxdosage * (patientWeight / 2.205);
+    const pillMg = Number(patientProfile.pmg);
 
-        // Check if any of the critical values are NaN or zero
-        if (
-          isNaN(calculatedmax) ||
-          isNaN(pillMg) ||
-          calculatedmax === 0 ||
-          pillMg === 0
-        ) {
-          return <h2 className="text-slate-400 ">Please select a mg...</h2>;
-        }
+    // Check if any of the critical values are NaN or zero
+    if (
+      isNaN(calculatedmax) ||
+      isNaN(pillMg) ||
+      calculatedmax === 0 ||
+      pillMg === 0
+    ) {
+      return <h2 className="text-slate-400">Please select a mg...</h2>;
+    }
 
-        // Function to always round down to the nearest half
-        const roundDownToNearestHalf = (num: number): number => {
-          return Math.floor(num * 2) / 2;
-        };
+    // Function to always round down to the nearest half
+    const roundDownToNearestHalf = (num: number): number => {
+      return Math.floor(num * 2) / 2;
+    };
 
-        const roundedMin =
-          calculatedmin > 0
-            ? roundDownToNearestHalf(calculatedmin / pillMg)
-            : 0;
-        const roundedMax = roundDownToNearestHalf(calculatedmax / pillMg);
+    const roundedMin =
+      calculatedmin > 0 ? roundDownToNearestHalf(calculatedmin / pillMg) : 0;
+    const roundedMax = roundDownToNearestHalf(calculatedmax / pillMg);
 
-        // Helper function to convert number to text and fraction
-        const formatDosage = (dose: number): string => {
-          switch (dose) {
-            case 0.5:
-              return "HALF (1/2)";
-            case 1:
-              return "ONE (1)";
-            case 1.5:
-              return "ONE AND A HALF (1 1/2)";
-            case 2:
-              return "TWO (2)";
-            default:
-              return `${dose}`; // Fallback for other values
-          }
-        };
+    // Helper function to convert number to text and fraction
+    const formatDosage = (dose: number): string => {
+      switch (dose) {
+        case 0.5:
+          return "HALF (1/2)";
+        case 1:
+          return "ONE (1)";
+        case 1.5:
+          return "ONE AND A HALF (1 1/2)";
+        case 2:
+          return "TWO (2)";
+        default:
+          return `${dose}`; // Fallback for other values
+      }
+    };
 
-        // Helper function to calculate the total milligrams
-        const calculateMg = (dose: number): number => {
-          return dose * pillMg;
-        };
+    // Helper function to calculate the total milligrams
+    const calculateMg = (dose: number): number => {
+      return dose * pillMg;
+    };
 
-        // Conditionally render the dosage information
-        return (
+    // Conditionally render the dosage information
+    return (
+      <div>
+        {roundedMin > 0 ? (
           <div>
-            {roundedMin > 0 ? (
-              <div>
-                <span>
-                  Give {formatDosage(roundedMin)} to {formatDosage(roundedMax)}.
-                </span>
-                <br />
-                <span className="text-sm text-slate-500">
-                  Give {roundedMin} ({calculateMg(roundedMin).toFixed(1)} mg) to{" "}
-                  {roundedMax} ({calculateMg(roundedMax).toFixed(1)} mg).
-                </span>
-              </div>
-            ) : (
-              <div>
+            <span>
+              Give {formatDosage(roundedMin)} to {formatDosage(roundedMax)}.
+            </span>
+            <br />
+            <span className="text-sm text-slate-500">
+              Give {roundedMin} ({calculateMg(roundedMin).toFixed(1)} mg) to{" "}
+              {roundedMax} ({calculateMg(roundedMax).toFixed(1)} mg).
+            </span>
+          </div>
+        ) : (
+          <div>
+            {roundedMax > 0 ? (
+              <>
                 <span>Give up to {formatDosage(roundedMax)}.</span>
                 <br />
                 <span className="text-sm text-slate-500">
                   Give up to {roundedMax} ({calculateMg(roundedMax).toFixed(1)}{" "}
                   mg).
                 </span>
-              </div>
+              </>
+            ) : (
+              <span>Consider a lower dosage.</span>
             )}
           </div>
-        );
-      },
-    },
+        )}
+      </div>
+    );
+  },
+},
     {
       header: "Instructions",
       id: "instructions",

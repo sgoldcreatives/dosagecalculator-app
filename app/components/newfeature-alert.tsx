@@ -71,7 +71,7 @@ export function AlertNewFeature() {
         className="flex items-center border-2 border-slate-500 rounded-md px-2 py-1 mt-2 bg-slate-50
                hover:bg-slate-500 hover:text-white transition shadow-md duration-300 ease-in-out"
       >
-        Okay
+        OK
       </button>
     </div>
   );
