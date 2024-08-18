@@ -94,15 +94,15 @@ export function VetDose() {
       header: "Name",
       cell: ({ row }) => {
         const medications = row.original;
-        const name = medications.name
-        const drugClass = medications.drugClass
+        const name = medications.name;
+        const drugClass = medications.drugClass;
         return (
           <div>
             <strong>{name}</strong>
-            <p className='text-sm'>{drugClass}</p>
+            <p className="text-sm">{drugClass}</p>
           </div>
-        )
-      }
+        );
+      },
     },
     {
       header: "Dose Range",
@@ -191,8 +191,7 @@ export function VetDose() {
           calculatedmax === 0 ||
           pillMg === 0
         ) {
-            return <h2 className="text-slate-400 ">Please select a mg...</h2>;
-
+          return <h2 className="text-slate-400 ">Please select a mg...</h2>;
         }
 
         // Function to always round down to the nearest half
@@ -237,8 +236,8 @@ export function VetDose() {
                 </span>
                 <br />
                 <span className="text-sm text-slate-500">
-                  Give {roundedMin} ({calculateMg(roundedMin)} mg) to {roundedMax}{" "}
-                  ({calculateMg(roundedMax)} mg).
+                  Give {roundedMin} ({calculateMg(roundedMin).toFixed(1)} mg) to{" "}
+                  {roundedMax} ({calculateMg(roundedMax).toFixed(1)} mg).
                 </span>
               </div>
             ) : (
@@ -246,7 +245,8 @@ export function VetDose() {
                 <span>Give up to {formatDosage(roundedMax)}.</span>
                 <br />
                 <span className="text-sm text-slate-500">
-                  Give up to {roundedMax} ({calculateMg(roundedMax)} mg).
+                  Give up to {roundedMax} ({calculateMg(roundedMax).toFixed(1)}{" "}
+                  mg).
                 </span>
               </div>
             )}
