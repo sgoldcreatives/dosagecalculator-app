@@ -223,57 +223,6 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-md text-2xl bg-violet-100 border-2 border-violet-300"
           />
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                role="combobox"
-                aria-expanded={open}
-                className="min-w-md text-2xl text-slate-400 justify-between bg-violet-100 border-2 border-violet-300 ml-auto mr-50 right-0"
-              >
-                {value
-                  ? dosageForm.find((dosageForm) => dosageForm.value === value)
-                      ?.label
-                  : "Select dosage form..."}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput placeholder="Search dosage form..." />
-                <CommandEmpty>No dosage form found.</CommandEmpty>
-                <CommandGroup>
-                  {dosageForm.map((framework) => (
-                    <CommandItem
-                      key={framework.value}
-                      value={framework.value}
-                      onSelect={(currentValue) => {
-                        setValue(currentValue === value ? "" : currentValue);
-                        setOpen(false);
-                        if (currentValue === "none") {
-                          table.getColumn("dosageForm")?.setFilterValue("");
-                        } else {
-                          table
-                            .getColumn("dosageForm")
-                            ?.setFilterValue(currentValue);
-                        }
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          value === framework.value
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      {framework.label}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover>
         </div>
       </div>
       <Table className="border-4 border-dashed text-xl rounded-md bg-violet-100  border-slate-300">

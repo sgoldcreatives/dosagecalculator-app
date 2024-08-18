@@ -115,6 +115,7 @@ export default function Page() {
           <div className="text-left font-medium">
             <strong>{row.getValue("name")}</strong>
           </div>
+          
         );
       },
     },

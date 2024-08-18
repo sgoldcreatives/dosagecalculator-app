@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import { medications, Med } from "./components/columns";
 import { pills, Pill } from "./components/pillcolumns";
 import { Button } from "@/components/ui/button";
@@ -90,11 +90,22 @@ export function VetDose() {
   const datapill = pills;
   const columnspill: ColumnDef<Pill>[] = [
     {
-      accessorKey: "name",
+      id: "name",
       header: "Name",
+      cell: ({ row }) => {
+        const medications = row.original;
+        const name = medications.name
+        const drugClass = medications.drugClass
+        return (
+          <div>
+            <strong>{name}</strong>
+            <p className='text-sm'>{drugClass}</p>
+          </div>
+        )
+      }
     },
     {
-      header: "Dosage Range",
+      header: "Dose Range",
       id: "dosage-range",
       cell: ({ row }) => {
         const medications = row.original;
@@ -128,18 +139,40 @@ export function VetDose() {
       },
     },
     {
-      header: "Instructions",
-      id: "instructions",
+      header: "Doses Available",
+      id: "dosesAvail",
       cell: ({ row }) => {
         const medications = row.original;
-        const bio = row.getValue("bio");
+        const doses = medications.dosesAvail;
+
+        const handleDoseClick = (dose: number) => {
+          setPatientProfile((prevProfile) => ({
+            ...prevProfile,
+            pmg: dose.toString(), // Convert the dose to a string to match the pmg type
+          }));
+        };
+
         return (
-          <div className="text-sm max-w-sm">{medications.instructions}</div>
+          <div className="flex space-x-2 overflow-x-auto flex-nowrap">
+            {doses.map((dose) => (
+              <button
+                key={dose}
+                className={`px-4 py-2 rounded-md border-2 transition-colors duration-200 whitespace-nowrap ${
+                  patientProfile.pmg === dose.toString()
+                    ? "bg-violet-500 text-white border-violet-500"
+                    : "bg-violet-200 text-violet-500 border-violet-500 hover:bg-violet-500 hover:text-white"
+                }`}
+                onClick={() => handleDoseClick(dose)}
+              >
+                {dose} mg
+              </button>
+            ))}
+          </div>
         );
       },
     },
     {
-      header: "Stock Dosage",
+      header: "Dosage by Pill",
       id: "stock dosage",
       cell: ({ row }) => {
         const medications = row.original;
@@ -158,33 +191,78 @@ export function VetDose() {
           calculatedmax === 0 ||
           pillMg === 0
         ) {
-          return null;
+            return <h2 className="text-slate-400 ">Please select a mg...</h2>;
+
         }
 
-        // Function to round to the nearest half
-        const roundToNearestHalf = (num: number): number => {
-          return Math.round(num * 2) / 2;
+        // Function to always round down to the nearest half
+        const roundDownToNearestHalf = (num: number): number => {
+          return Math.floor(num * 2) / 2;
         };
 
         const roundedMin =
-          calculatedmin > 0 ? roundToNearestHalf(calculatedmin / pillMg) : null;
-        const roundedMax = roundToNearestHalf(calculatedmax / pillMg);
+          calculatedmin > 0
+            ? roundDownToNearestHalf(calculatedmin / pillMg)
+            : 0;
+        const roundedMax = roundDownToNearestHalf(calculatedmax / pillMg);
+
+        // Helper function to convert number to text and fraction
+        const formatDosage = (dose: number): string => {
+          switch (dose) {
+            case 0.5:
+              return "HALF (1/2)";
+            case 1:
+              return "ONE (1)";
+            case 1.5:
+              return "ONE AND A HALF (1 1/2)";
+            case 2:
+              return "TWO (2)";
+            default:
+              return `${dose}`; // Fallback for other values
+          }
+        };
+
+        // Helper function to calculate the total milligrams
+        const calculateMg = (dose: number): number => {
+          return dose * pillMg;
+        };
 
         // Conditionally render the dosage information
         return (
           <div>
-            {roundedMin !== null && (
-              <span>
-                Give {roundedMin} to {roundedMax} of a single{" "}
-                {patientProfile.pmg} mg pill
-              </span>
-            )}
-            {roundedMin === null && (
-              <span>
-                Give up to {roundedMax} of a single {patientProfile.pmg} mg pill
-              </span>
+            {roundedMin > 0 ? (
+              <div>
+                <span>
+                  Give {formatDosage(roundedMin)} to {formatDosage(roundedMax)}{" "}
+                  of a pill.
+                </span>
+                <br />
+                <span className="text-sm text-slate-500">
+                  Give {roundedMin} ({calculateMg(roundedMin)} mg) to {roundedMax}{" "}
+                  ({calculateMg(roundedMax)} mg)
+                </span>
+              </div>
+            ) : (
+              <div>
+                <span>Give up to {formatDosage(roundedMax)} of a pill.</span>
+                <br />
+                <span className="text-sm text-slate-500">
+                  Give up to {roundedMax} ({calculateMg(roundedMax)} mg)
+                </span>
+              </div>
             )}
           </div>
+        );
+      },
+    },
+    {
+      header: "Instructions",
+      id: "instructions",
+      cell: ({ row }) => {
+        const medications = row.original;
+        const bio = row.getValue("bio");
+        return (
+          <div className="text-sm max-w-sm">{medications.instructions}</div>
         );
       },
     },
@@ -399,23 +477,6 @@ export function VetDose() {
         )}
         {selectedSwitch === "pill" && (
           <div className="m-2">
-            <div className="mt-3 text-base rounded-md bg-violet-100 border-violet-100 border-2 border-b-violet-500 w-full max-w-xs flex items-center justify-between p-2">
-              <div className="flex flex-col">
-                <p className="ml-4 text-sm opacity-60 font-normal">
-                  mg in stock
-                </p>
-                <div className="flex items-center mt-1">
-                  <input
-                    className="input pb-1 input-bordered w-full max-w-xs font-normal text-end text-xl bg-violet-100 rounded-md px-2 pt-1 text-slate-950 focus:outline-none focus:border-none placeholder:text-slate-400"
-                    placeholder="Enter mg..."
-                    onChange={handleMGChange}
-                  />
-                  <div className="text-slate-950 ml-1 text-xl font-normal">
-                    mg
-                  </div>
-                </div>
-              </div>
-            </div>
             <DataTable columns={columnspill} data={datapill} />
           </div>
         )}
