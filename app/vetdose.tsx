@@ -30,6 +30,7 @@ import { WeightContext } from "./context";
 import { HowToDC } from "./components/howToComponents/howtoDC";
 import { ToCustom } from "./toCustom";
 import { AlertNewFeature } from "./components/newfeature-alert";
+import { FeatureAlert } from "./components/featurealert";
 
 function lbsToKg(Pweight: number) {
   return Pweight / 2.205;
@@ -87,6 +88,54 @@ export function VetDose() {
     }
   };
 
+  const [totalCalcEnabled, setTotalCalcEnabled] = useState(false); // New state for the total switch
+  const toggletotalCalc = () => {
+    setTotalCalcEnabled(!totalCalcEnabled);
+  };
+
+  const [frequency, setFrequency] = useState<number>(1); // 1 for 'sid', 2 for 'bid', 3 for 'tid', or any custom integer
+
+  const handleFrequencyChange = (newFrequency: number) => {
+    setFrequency(newFrequency);
+  };
+
+  const handleOtherChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value)) {
+      setFrequency(value);
+    }
+  };
+
+  const [days, setDays] = useState<string>(""); // State for number of days as a string
+
+  const handleDaysChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDays(e.target.value);
+  };
+
+  const parsedDays = parseFloat(days); // Parsing the string to a float when needed
+
+  const [dose, setDose] = useState<string>(""); // State for dose as a string
+
+  const handleDoseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDose(e.target.value);
+  };
+
+  const parsedDose = parseFloat(dose); // Parsing the dose string to a float when needed
+  const calculateTotal = () => {
+    const parsedDose = parseFloat(dose);
+    const parsedDays = parseFloat(days);
+    const total = Math.round(parsedDose * frequency * parsedDays);
+
+    const hasError =
+      isNaN(total) || total === 0 || !parsedDose || !frequency || !parsedDays;
+
+    return {
+      total: hasError ? null : total,
+      hasError,
+    };
+  };
+
+  const { total, hasError } = calculateTotal();
   const datapill = pills;
   const columnspill: ColumnDef<Pill>[] = [
     {
@@ -400,7 +449,7 @@ export function VetDose() {
                   </p>
                   <div className="flex items-center">
                     <input
-                      className="input pb-2 input-bordered w-full max-w-sm font-normal text-end text-5xl bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none placeholder:text-slate-400"
+                      className="input pb-2 input-bordered w-full max-w-sm font-normal text-end text-5xl bg-violet-100 rounded-md px-3 pt-2 text-slate-950 focus:outline-none focus:border-none total:text-slate-400"
                       placeholder="Enter weight..."
                       onChange={handleWeightChange}
                     />
@@ -411,37 +460,76 @@ export function VetDose() {
                 </div>
               </div>
               <div className="ml-4">
-                <div className="flex items-center mt-5">
-                  <Switch.Root
-                    id="inj-oral-calculator"
-                    checked={selectedSwitch === "inj-oral"}
-                    onCheckedChange={() => handleSwitchChange("inj-oral")}
-                    className="w-[48px] h-[28px] bg-gray-300 rounded-full relative outline-none cursor-pointer data-[state=checked]:bg-violet-300 border-2 border-violet-400"
-                  >
-                    <Switch.Thumb className="block w-[24px] h-[24px] bg-violet-400 rounded-full transition-transform duration-100 translate-x-0.25 data-[state=checked]:translate-x-[24px]" />
-                  </Switch.Root>
-                  <label
-                    className="text-slate-500 text-md ml-2 whitespace-nowrap"
-                    htmlFor="inj-oral-calculator"
-                  >
-                    💉 & 🍯
-                  </label>
+                <div className="flex items-center space-x-4 mt-5">
+                  <HoverCard>
+                    <HoverCardTrigger className="flex items-center">
+                      <Switch.Root
+                        id="inj-oral-calculator"
+                        checked={selectedSwitch === "inj-oral"}
+                        onCheckedChange={() => handleSwitchChange("inj-oral")}
+                        className="w-[48px] h-[28px] bg-gray-300 rounded-full relative outline-none cursor-pointer data-[state=checked]:bg-violet-300 border-2 border-violet-400"
+                      >
+                        <Switch.Thumb className="block w-[24px] h-[24px] bg-violet-400 rounded-full transition-transform duration-100 translate-x-0.25 data-[state=checked]:translate-x-[24px]" />
+                      </Switch.Root>
+                      <label
+                        className="text-slate-500 text-md ml-2 whitespace-nowrap"
+                        htmlFor="inj-oral-calculator"
+                      >
+                        💉 & 🍯
+                      </label>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="text-sm bg-violet-100 border-4 border-slate-300">
+                      Injection and Oral Dosage Calculator
+                    </HoverCardContent>
+                  </HoverCard>
                 </div>
-                <div className="flex items-center mt-4">
-                  <Switch.Root
-                    id="pill-calculator"
-                    checked={selectedSwitch === "pill"}
-                    onCheckedChange={() => handleSwitchChange("pill")}
-                    className="w-[48px] h-[28px] bg-gray-300 rounded-full relative outline-none cursor-pointer data-[state=checked]:bg-violet-300 border-2 border-violet-400"
-                  >
-                    <Switch.Thumb className="block w-[24px] h-[24px] bg-violet-400 rounded-full transition-transform duration-100 translate-x-0.25 data-[state=checked]:translate-x-[24px]" />
-                  </Switch.Root>
-                  <label
-                    className="text-slate-500 text-md ml-2 whitespace-nowrap"
-                    htmlFor="pill-calculator"
-                  >
-                    💊
-                  </label>
+
+                <div className="flex items-center space-x-4 mt-4">
+                  <HoverCard>
+                    <HoverCardTrigger className="flex items-center">
+                      <Switch.Root
+                        id="pill-calculator"
+                        checked={selectedSwitch === "pill"}
+                        onCheckedChange={() => handleSwitchChange("pill")}
+                        className="w-[48px] h-[28px] bg-gray-300 rounded-full relative outline-none cursor-pointer data-[state=checked]:bg-violet-300 border-2 border-violet-400"
+                      >
+                        <Switch.Thumb className="block w-[24px] h-[24px] bg-violet-400 rounded-full transition-transform duration-100 translate-x-0.25 data-[state=checked]:translate-x-[24px]" />
+                      </Switch.Root>
+                      <label
+                        className="text-slate-500 text-md ml-2 whitespace-nowrap"
+                        htmlFor="pill-calculator"
+                      >
+                        💊
+                      </label>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="text-sm bg-violet-100 border-4 border-slate-300">
+                      Pill Dosage Calculator
+                    </HoverCardContent>
+                  </HoverCard>
+                </div>
+
+                <div className="flex items-center space-x-4 mt-4">
+                  <HoverCard>
+                    <HoverCardTrigger className="flex items-center">
+                      <Switch.Root
+                        id="total-calc"
+                        checked={totalCalcEnabled}
+                        onCheckedChange={toggletotalCalc}
+                        className="w-[48px] h-[28px] bg-gray-300 rounded-full relative outline-none cursor-pointer data-[state=checked]:bg-violet-300 border-2 border-violet-400"
+                      >
+                        <Switch.Thumb className="block w-[24px] h-[24px] bg-violet-400 rounded-full transition-transform duration-100 translate-x-0.25 data-[state=checked]:translate-x-[24px]" />
+                      </Switch.Root>
+                      <label
+                        className="text-slate-500 text-md ml-2 whitespace-nowrap"
+                        htmlFor="total-calc"
+                      >
+                        📊
+                      </label>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="text-sm bg-violet-100 border-4 border-slate-300">
+                      Pill Total Calculator
+                    </HoverCardContent>
+                  </HoverCard>
                 </div>
               </div>
             </div>
@@ -455,6 +543,9 @@ export function VetDose() {
             ) : (
               <p></p>
             )}
+            <div className="">
+              <FeatureAlert />
+            </div>
             <div className="flex mt-4">
               <span className="mr-3">
                 <ToCustom />
@@ -470,7 +561,127 @@ export function VetDose() {
               </span>
             </div>
           </div>
-          <AlertNewFeature />
+          <div className="relative">
+            {/* <div className="absolute top-0 left-0 z-10">
+              <AlertNewFeature />
+            </div> */}
+            {totalCalcEnabled && (
+              <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-2 p-3 max-w-md text-slate-950">
+                <div className="mb-2">
+                  <label className="text-xs text-slate-600">
+                    Dose (# of pills taking at once):
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter dose"
+                    className="w-full px-2 py-1 text-sm border-2 border-slate-400 rounded-md"
+                    onChange={handleDoseChange}
+                    value={dose}
+                  />
+                </div>
+
+                <div className="flex items-center justify-center mb-2">
+                  <span className="mx-1 italic text-slate-600">pills per</span>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex space-x-1 justify-center">
+                    <button
+                      onClick={() => handleFrequencyChange(1)}
+                      className={`w-12 h-12 text-xs rounded-md border-2 transition-colors duration-200 ${
+                        frequency === 1
+                          ? "bg-violet-500 text-white border-violet-500"
+                          : "bg-violet-200 text-violet-500 border-violet-500 hover:bg-violet-500 hover:text-white"
+                      }`}
+                    >
+                      SID
+                    </button>
+                    <button
+                      onClick={() => handleFrequencyChange(2)}
+                      className={`w-12 h-12 text-xs rounded-md border-2 transition-colors duration-200 ${
+                        frequency === 2
+                          ? "bg-violet-500 text-white border-violet-500"
+                          : "bg-violet-200 text-violet-500 border-violet-500 hover:bg-violet-500 hover:text-white"
+                      }`}
+                    >
+                      BID
+                    </button>
+                    <button
+                      onClick={() => handleFrequencyChange(3)}
+                      className={`w-12 h-12 text-xs rounded-md border-2 transition-colors duration-200 ${
+                        frequency === 3
+                          ? "bg-violet-500 text-white border-violet-500"
+                          : "bg-violet-200 text-violet-500 border-violet-500 hover:bg-violet-500 hover:text-white"
+                      }`}
+                    >
+                      TID
+                    </button>
+                  </div>
+
+                  <div className="flex flex-col items-center space-y-1">
+                    <label className="text-xs text-slate-600">
+                      Custom Frequency:
+                    </label>
+                    <button
+                      onClick={() => handleFrequencyChange(0)}
+                      className={`w-full h-10 text-xs rounded-md border-2 transition-colors duration-200 ${
+                        frequency !== 1 && frequency !== 2 && frequency !== 3
+                          ? "bg-violet-500 text-white border-violet-500"
+                          : "bg-violet-200 text-violet-500 border-violet-500 hover:bg-violet-500 hover:text-white"
+                      }`}
+                    >
+                      Other
+                    </button>
+                    <input
+                      type="number"
+                      placeholder="Enter value"
+                      className="w-full px-2 py-1 text-xs border-2 border-slate-400 rounded-md"
+                      onChange={handleOtherChange}
+                      disabled={
+                        frequency === 1 || frequency === 2 || frequency === 3
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center my-2">
+                  <span className="mx-1 italic text-slate-600">for</span>
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="text-xs text-slate-600">
+                    Number of Days:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter number of days"
+                    className="w-full px-2 py-1 text-sm border-2 border-slate-400 rounded-md"
+                    onChange={handleDaysChange}
+                    value={days}
+                  />
+                </div>
+
+                <div
+                  className={`mt-4 p-2 rounded-md text-center text-slate-950 ${
+                    hasError
+                      ? "bg-red-100 border-red-300"
+                      : "bg-violet-100 border-violet-300"
+                  }`}
+                >
+                  {hasError ? (
+                    <div className="flex justify-center items-center space-x-1">
+                      <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                      <span className="text-xs text-red-600">Check inputs</span>
+                    </div>
+                  ) : (
+                    <div className="text-xl font-semibold text-violet-700">
+                      {total} total pills
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {selectedSwitch === "inj-oral" && (
@@ -479,12 +690,16 @@ export function VetDose() {
           </div>
         )}
         {selectedSwitch === "pill" && (
-          <div className="m-2">
+          <div className="m-2 flex">
             <DataTable columns={columnspill} data={datapill} />
           </div>
         )}
-
         <Footer />
+        <p className="text-xs text-sky-100">
+          This is dedicated to my dad, Yiselle, Pinky, Leslie, Martha, and yes,
+          even Adriana. For all of the hurt that I have experienced this past
+          year, you all made it worth it - Saar "The Princess" :p
+        </p>
       </WeightContext.Provider>
     </main>
   );
