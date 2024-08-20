@@ -48,7 +48,7 @@ export function FeatureAlert() {
                 onClick={closeDialog}
                 className="mt-4 p-2 bg-slate-500 text-white rounded-md hover:bg-slate-600"
               >
-                Close
+                Click here to get rid of that annoying yellow thing.
               </button>
             </DialogContent>
           </Dialog>
