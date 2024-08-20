@@ -696,8 +696,7 @@ export function VetDose() {
         )}
         <Footer />
         <p className="text-xs text-sky-100">
-          This is dedicated to my dad, Yiselle, Pinky, Leslie, Martha, and yes,
-          even Adriana. For all of the hurt that I have experienced this past
+          This is dedicated to my dad, Yiselle, Pinky, Leslie, Martha, Adriana, and everyone else that has stuck around. For all of the hurt that I have experienced this past
           year, you all made it worth it - Saar &quot;The Princess&quot; :p
         </p>
       </WeightContext.Provider>
