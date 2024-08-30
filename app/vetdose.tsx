@@ -543,9 +543,9 @@ export function VetDose() {
             ) : (
               <p></p>
             )}
-            <div className="">
+            {/* <div className="">
               <FeatureAlert />
-            </div>
+            </div> */}
             <div className="flex mt-4">
               <span className="mr-3">
                 <ToCustom />
@@ -562,9 +562,6 @@ export function VetDose() {
             </div>
           </div>
           <div className="relative">
-            {/* <div className="absolute top-0 left-0 z-10">
-              <AlertNewFeature />
-            </div> */}
             {totalCalcEnabled && (
               <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-2 p-3 max-w-md text-slate-950">
                 <div className="mb-2">
