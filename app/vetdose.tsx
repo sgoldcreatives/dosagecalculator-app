@@ -566,7 +566,7 @@ export function VetDose() {
               <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-2 p-3 max-w-md text-slate-950">
                 <div className="mb-2">
                   <label className="text-xs text-slate-600">
-                    Dose (# of pills taking at once):
+                    Dose (# of pills/mL's taking at once):
                   </label>
                   <input
                     type="text"
@@ -578,7 +578,7 @@ export function VetDose() {
                 </div>
 
                 <div className="flex items-center justify-center mb-2">
-                  <span className="mx-1 italic text-slate-600">pills per</span>
+                  <span className="mx-1 italic text-slate-600">pills/mL's per</span>
                 </div>
 
                 <div className="space-y-2">
@@ -672,7 +672,7 @@ export function VetDose() {
                     </div>
                   ) : (
                     <div className="text-xl font-semibold text-violet-700">
-                      {total} total pills
+                      {total} total pills or mL's
                     </div>
                   )}
                 </div>
