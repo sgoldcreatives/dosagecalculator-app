@@ -291,11 +291,20 @@ export const medications: Med[] = [
   },
   {
     id: 31,
-    dosage: .00907,
+    dosage: 0.00907,
     name: "Triamcinolone/Kenalog",
     concentration: "10 mg/mL",
     tags: ["Steroid"],
     dosageForm: "💉",
     bio: "",
-  }
+  },
+  {
+    id: 40,
+    dosage: 0.22675737,
+    name: "Panacur",
+    concentration: "100 mg/mL",
+    tags: [],
+    dosageForm: "🍯",
+    bio: "Dewormer; for 3-5 days.",
+  },
 ];
