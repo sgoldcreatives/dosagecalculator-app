@@ -566,7 +566,7 @@ export function VetDose() {
               <div className="border-2 rounded-md border-violet-300 bg-slate-100 m-2 p-3 max-w-md text-slate-950">
                 <div className="mb-2">
                   <label className="text-xs text-slate-600">
-                    Dose (# of pills/mL's taking at once):
+                    Dose (# of pills/mLs taking at once):
                   </label>
                   <input
                     type="text"
@@ -578,7 +578,9 @@ export function VetDose() {
                 </div>
 
                 <div className="flex items-center justify-center mb-2">
-                  <span className="mx-1 italic text-slate-600">pills/mL's per</span>
+                  <span className="mx-1 italic text-slate-600">
+                    pills/mLs per
+                  </span>
                 </div>
 
                 <div className="space-y-2">
@@ -672,7 +674,7 @@ export function VetDose() {
                     </div>
                   ) : (
                     <div className="text-xl font-semibold text-violet-700">
-                      {total} total pills or mL's
+                      {total} total pills or mLs
                     </div>
                   )}
                 </div>
@@ -693,8 +695,10 @@ export function VetDose() {
         )}
         <Footer />
         <p className="text-xs text-sky-100">
-          This is dedicated to my dad, Yiselle, Pinky, Leslie, Martha, Adriana, and everyone else that has stuck around. For all of the hurt that I have experienced this past
-          year, you all made it worth it - Saar &quot;The Princess&quot; :p
+          This is dedicated to my dad, Yiselle, Pinky, Leslie, Martha, Adriana,
+          and everyone else that has stuck around. For all of the hurt that I
+          have experienced this past year, you all made it worth it - Saar
+          &quot;The Princess&quot; :p
         </p>
       </WeightContext.Provider>
     </main>
