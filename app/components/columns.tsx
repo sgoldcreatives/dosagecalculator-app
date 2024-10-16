@@ -247,7 +247,7 @@ export const medications: Med[] = [
   {
     id: 28,
     dosage: 0.04535,
-    name: "Gabapentin (K9)",
+    name: "Gabapentin (🐕)",
     concentration: "100 mg/mL",
     tags: ["For Dogs", "Tx"],
     dosageForm: "🍯",
@@ -256,7 +256,7 @@ export const medications: Med[] = [
   {
     id: 29,
     dosage: 0.068027,
-    name: "Gabapentin (Fel)",
+    name: "Gabapentin (🐈)",
     concentration: "100 mg/mL",
     tags: ["For Cats", "Tx"],
     dosageForm: "🍯",
