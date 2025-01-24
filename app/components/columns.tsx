@@ -83,14 +83,6 @@ export const medications: Med[] = [
     bio: "Cerenia is an injectable medication commonly prescribed to dogs and cats for the prevention and treatment of motion sickness, as well as to control vomiting associated with various conditions.",
   },
   {
-    dosage: 0.03,
-    name: "Buprenorphine",
-    concentration: "0.3 mg/mL",
-    tags: ["Pain", "Sx"],
-    dosageForm: "💉",
-    bio: "Buprenorphine is an injectable opioid analgesic used for pain relief in veterinary medicine, particularly in surgical and postoperative settings.",
-  },
-  {
     dosage: 0.015,
     name: "Buprenorphine",
     concentration: "0.6 mg/mL",
