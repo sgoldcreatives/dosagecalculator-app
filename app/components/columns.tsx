@@ -131,12 +131,12 @@ export const medications: Med[] = [
     bio: "Meloxicam, in injectable form, is utilized in dogs and cats for pain management, particularly after surgical procedures or in cases of osteoarthritis.",
   },
   {
-    dosage: 0.03,
-    name: "Panacur",
-    concentration: "100 mg/mL",
-    tags: ["For Dogs", "For Cats", "Tx"],
-    dosageForm: "🍯",
-    bio: "Panacur is an anthelmintic medication commonly used to deworm dogs and cats, targeting various intestinal parasites.",
+    dosage: 0.066515495,
+    name: "Ampicillin Sulbactam",
+    concentration: "150 mg/mL",
+    tags: ["For Dogs", "For Cats", "Antibiotic", "Sx"],
+    dosageForm: "💉",
+    bio: "Ampicillin sulbactam is an injectable antibiotic used in veterinary medicine to treat bacterial infections in dogs and cats, particularly those involving the skin, soft tissue, and urinary tract.",
   },
   {
     dosage: 0.009,
@@ -227,12 +227,12 @@ export const medications: Med[] = [
     bio: "Gabapentin is an oral medication used in veterinary medicine to manage neuropathic pain and seizures in cats. It’s particularly effective for chronic pain conditions such as osteoarthritis and intervertebral disc disease.",
   },
   {
-    dosage: 0.00907,
+    dosage: 0.005,
     name: "Triamcinolone/Kenalog",
     concentration: "10 mg/mL",
     tags: ["Steroid"],
     dosageForm: "💉",
-    bio: "",
+    bio: "Steroid injection for allergies, inflammation, and autoimmune diseases; Lasts arond 10 days.",
   },
   {
     dosage: 0.22675737,
