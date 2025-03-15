@@ -148,7 +148,7 @@ export const medications: Med[] = [
   },
   {
     dosage: 0.04,
-    name: "Rimadyl/Carprofen",
+    name: "Carprofen",
     concentration: "50 mg/mL",
     tags: ["For Dogs", "Pain", "Sx"],
     dosageForm: "💉",
@@ -156,7 +156,7 @@ export const medications: Med[] = [
   },
   {
     dosage: 0.00907029478,
-    name: "Butorphanol",
+    name: "Butorphanol (Torb)",
     concentration: "10 mg/mL",
     tags: ["For Dogs", "For Cats", "Pain", "Sx"],
     dosageForm: "💉",
