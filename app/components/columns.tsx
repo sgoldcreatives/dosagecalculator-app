@@ -155,9 +155,17 @@ export const medications: Med[] = [
     bio: "Rimadyl (Carprofen) is an injectable NSAID commonly used in dogs for pain relief and reduction of inflammation, especially in cases of osteoarthritis and postoperative care.",
   },
   {
+    dosage: 0.00907029478,
+    name: "Butorphanol",
+    concentration: "10 mg/mL",
+    tags: ["For Dogs", "For Cats", "Pain", "Sx"],
+    dosageForm: "💉",
+    bio: "Butorphanol is an injectable opioid analgesic used in veterinary medicine to manage pain in dogs and cats, particularly after surgical procedures or in cases of trauma. Dosage is 0.2-0.4 mg/kg SC, IM, or IV q4-6h.",
+  },
+  {
     dosage: 0.226,
     name: "Propofol",
-    concentration: "50 mg/5 mL",
+    concentration: "10 mg/mL",
     tags: ["Sx"],
     dosageForm: "💉",
     bio: "Propofol is an intravenous anesthetic agent commonly used for induction and maintenance of anesthesia in dogs and cats during surgical procedures.",
