@@ -107,6 +107,14 @@ export const medications: Med[] = [
     bio: "Metronidazole is an antibiotic used to treat bacterial and parasitic infections in both dogs and cats, particularly those affecting the gastrointestinal tract.",
   },
   {
+    dosage: 0.05625,
+    name: "Metronidazole",
+    concentration: "80 mg/mL",
+    tags: ["Antibiotic", "For Cats", "For Dogs", "Tx"],
+    dosageForm: "🍯",
+    bio: "Metronidazole is an antibiotic used to treat bacterial and parasitic infections in both dogs and cats, particularly those affecting the gastrointestinal tract.",
+  },
+  {
     dosage: 0.0999,
     name: "Meloxicam",
     concentration: "0.5 mg/mL",
