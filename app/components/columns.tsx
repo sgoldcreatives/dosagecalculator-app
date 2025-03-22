@@ -61,7 +61,7 @@ export const medications: Med[] = [
   {
     dosage: 0.099,
     name: "Cefazolin",
-    concentration: "10 mg/mL",
+    concentration: "100 mg/mL",
     tags: ["Antibiotic", "For Dogs", "Tx"],
     dosageForm: "💉",
     bio: "Cefazolin is an injectable antibiotic commonly used in veterinary medicine to treat bacterial infections in dogs, particularly those involving the skin, soft tissue, and urinary tract.",
